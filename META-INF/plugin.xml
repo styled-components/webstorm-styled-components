@@ -31,9 +31,9 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <!--<annotator language="JSX Harmony" implementationClass="SCAnnotator"/>-->
-        <!--<annotator language="JavaScript" implementationClass="SCAnnotator"/>-->
-        <languageInjector implementation="SCAnnotator"/>
+        <!--<annotator language="JSX Harmony" implementationClass="SCInjector"/>-->
+        <!--<annotator language="JavaScript" implementationClass="SCInjector"/>-->
+        <languageInjector implementation="SCInjector"/>
     </extensions>
 
     <application-components>

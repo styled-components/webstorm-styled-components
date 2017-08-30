@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by deadlock on 8/30/17.
  */
-public class SCAnnotator implements LanguageInjector {
+public class SCInjector implements LanguageInjector {
 //    @Override
 //    public void annotate(@NotNull final PsiElement element, @NotNull AnnotationHolder holder) {
 //        Collection<PsiElement> scBlocks = this.findSCBlocks(element);
@@ -48,7 +48,7 @@ public class SCAnnotator implements LanguageInjector {
         }
 
         String parentExpressionText = element.getParent().getFirstChild().getText();
-        if(!parentExpressionText.startsWith("styled") && !parentExpressionText.startsWith("keyframes") && !parentExpressionText.endsWith(".extend")) {
+        if(!parentExpressionText.startsWith("styled") && !parentExpressionText.startsWith("keyframes") && !parentExpressionText.endsWith("extend")) {
             return;
         }
 
