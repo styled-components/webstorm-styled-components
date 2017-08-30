@@ -1,6 +1,8 @@
 # styled-components-webstorm-syntax
 React Styled Components Language Support in IntelliJ Platform
 
+https://github.com/styled-components/styled-components
+
 # Motivation
 https://github.com/styled-components/styled-components/issues/176
 
