@@ -1,8 +1,8 @@
-<idea-plugin version="2">
+<idea-plugin>
     <id>com.deadlock.scsyntax</id>
-    <name>Plugin display name here</name>
+    <name>Styled Components</name>
     <version>1.0</version>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
     <depends>com.intellij.modules.lang</depends>
@@ -10,18 +10,17 @@
     <!-- This enables the PSI capability for JavaScript -->
     <depends>JavaScript</depends>
     <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      Language Support For React Styled Components
+      https://github.com/styled-components/styled-components
     ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+
     ]]>
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="131"/>
+    <idea-version since-build="100"/>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
          on how to target different products -->
