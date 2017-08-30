@@ -8,8 +8,9 @@ https://github.com/styled-components/styled-components/issues/176
 An alpha version is here! Here are the steps you need for installations
 - Download the alpha release from here [v1.0-alpha](https://github.com/styled-components/webstorm-styled-components/archive/v1.0-alpha.zip)
 - Extract the archive
-- In Webstorm, Hit <kbd>CMD</kbd>+<kbd>SHIFT</kbd>+<kbd>A</kbd> to bring up actions pane. Then select *Add Plugin From Filesystem*
+- In Webstorm, Hit <kbd>CMD</kbd>+<kbd>SHIFT</kbd>+<kbd>A</kbd> to bring up actions pane. Then select *Add Plugin From Disk*
 - Select `webstorm-styled-components.jar` to install the plugin
+- You should find your StyledComponents instances highlighted automatically
 
 # Known Issues
 The plugin only works with Webstorm 2017
