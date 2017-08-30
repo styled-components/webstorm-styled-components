@@ -1,7 +1,5 @@
-# styled-components-webstorm-syntax
-React Styled Components Language Support in IntelliJ Platform
-
-https://github.com/styled-components/styled-components
+# webstorm-styled-components
+React Styled Components Language Support in IntelliJ/Webstorm
 
 # Motivation
 https://github.com/styled-components/styled-components/issues/176
@@ -15,6 +13,7 @@ https://github.com/styled-components/styled-components/issues/176
 - Inject SCSS in the matched literals
 
 # TODO
+- Add installation instructions
 - Treat ES6 Interpolation in property position as a css value
 - Smart Indentation when opening backticks and pressing enter.
 
