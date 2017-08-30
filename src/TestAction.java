@@ -22,33 +22,31 @@ public class TestAction extends AnAction {
         String injectableWithUnderscores =
                 "_" + caret + "_";
 
-        this.findSCBlocks(e.getData(PlatformDataKeys.PSI_FILE));
+//        this.findSCBlocks(e.getData(PlatformDataKeys.PSI_FILE));
     }
 
 
-    PsiElement findSCBlocks(PsiFile file) {
-        Collection<JSStringTemplateExpression> templates = PsiTreeUtil.findChildrenOfType(file, JSStringTemplateExpression.class);
-
-        for ( PsiElement template: templates ) {
-            Collection<PsiElement> refs = PsiTreeUtil.findChildrenOfAnyType(template, JSReferenceExpression.class);
-            if(refs.size() == 0) {
-                templates.remove(template);
-            }
-        }
-
-        for( PsiElement template: templates) {
-            //Get css block
-            Collection<PsiElement> scBlocks = PsiTreeUtil.findChildrenOfType(template, PsiElement.class);
-            System.out.println("Searching for scBlocks");
-            for(PsiElement e : scBlocks) {
-                if(e.getNode().getElementType() == JSTokenTypes.STRING_TEMPLATE_PART) {
-                    System.out.println(e.getText());
-                }
-            }
-        }
-
-
-
-        return null;
-    }
+//    PsiElement findSCBlocks(PsiFile file) {
+//        Collection<JSStringTemplateExpression> templates = PsiTreeUtil.findChildrenOfType(file, JSStringTemplateExpression.class);
+//
+//        for ( PsiElement template: templates ) {
+//            Collection<PsiElement> refs = PsiTreeUtil.findChildrenOfAnyType(template, JSReferenceExpression.class);
+//            if(refs.size() == 0) {
+//                templates.remove(template);
+//            }
+//        }
+//
+//        for( PsiElement template: templates) {
+//            //Get css block
+//            Collection<PsiElement> scBlocks = PsiTreeUtil.findChildrenOfType(template, PsiElement.class);
+//            System.out.println("Searching for scBlocks");
+//            for(PsiElement e : scBlocks) {
+//                if(e.getNode().getElementType() == JSTokenTypes.STRING_TEMPLATE_PART) {
+//                    System.out.println(e.getText());
+//                }
+//            }
+//        }
+//
+//        return null;
+//    }
 }

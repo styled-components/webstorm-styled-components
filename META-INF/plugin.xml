@@ -1,11 +1,12 @@
 <idea-plugin version="2">
-    <id>com.yourcompany.unique.plugin.id</id>
+    <id>com.deadlock.scsyntax</id>
     <name>Plugin display name here</name>
     <version>1.0</version>
     <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
     <!-- Enable plugin for all products -->
     <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.css</depends>
     <!-- This enables the PSI capability for JavaScript -->
     <depends>JavaScript</depends>
     <description><![CDATA[
@@ -30,8 +31,9 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <annotator language="JSX Harmony" implementationClass="SCAnnotator"/>
-
+        <!--<annotator language="JSX Harmony" implementationClass="SCAnnotator"/>-->
+        <!--<annotator language="JavaScript" implementationClass="SCAnnotator"/>-->
+        <languageInjector implementation="SCAnnotator"/>
     </extensions>
 
     <application-components>
