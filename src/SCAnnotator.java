@@ -48,7 +48,7 @@ public class SCAnnotator implements LanguageInjector {
         }
 
         String parentExpressionText = element.getParent().getFirstChild().getText();
-        if(!parentExpressionText.startsWith("styled") && !parentExpressionText.startsWith("keyframes")) {
+        if(!parentExpressionText.startsWith("styled") && !parentExpressionText.startsWith("keyframes") && !parentExpressionText.endsWith(".extend")) {
             return;
         }
 
@@ -57,7 +57,15 @@ public class SCAnnotator implements LanguageInjector {
             if (c.getNode().getElementType() == JSTokenTypes.STRING_TEMPLATE_PART) {
                 TextRange range = new TextRange(c.getStartOffsetInParent(), c.getStartOffsetInParent() + c.getTextLength());
                 System.out.println(c.getText());
-                injectedLanguagePlaces.addPlace(CSSLanguage.findLanguageByID("SCSS"), range, "dummy_selector {", "}");
+                String prefix = c.getText().trim().indexOf(":") < c.getText().trim().indexOf(";") &&
+                        c.getText().trim().indexOf(":") != -1  &&
+                        c.getText().trim().indexOf(";") != -1 ? "sel {": "sel { fakeprop: initial ";
+
+                if(c.getText().trim().endsWith(":")) {
+                    prefix = "sel {";
+                }
+                String suffix = c.getText().trim().endsWith(";") ? "}": "initial; }";
+                injectedLanguagePlaces.addPlace(CSSLanguage.findLanguageByID("SCSS"), range, prefix, suffix);
             }
         }
     }

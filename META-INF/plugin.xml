@@ -47,11 +47,6 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="com.helloworld.testAction" class="TestAction" text="TestAction">
-            <add-to-group group-id="ActiveToolwindowGroup" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt X"/>
-        </action>
-        <action id="testAction" class="TestAction" text="TestAction"/>
     </actions>
 
 
