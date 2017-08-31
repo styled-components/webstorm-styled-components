@@ -24,5 +24,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <multiHostInjector implementation="com.intellij.StyledComponents.StyledComponentsInjector"/>
+        <highlightErrorFilter implementation="com.intellij.StyledComponents.InterpolationArgumentsErrorFilter"/>
+        <daemon.highlightInfoFilter implementation="com.intellij.StyledComponents.InterpolationArgumentsErrorFilter"/>
     </extensions>
 </idea-plugin>
