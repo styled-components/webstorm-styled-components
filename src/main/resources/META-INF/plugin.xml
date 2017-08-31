@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>com.deadlock.scsyntax</id>
+    <name>Styled Components</name>
+    <version>1.0</version>
+    <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
+
+    <!-- Enable plugin for all products -->
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.css</depends>
+    <!-- This enables the PSI capability for JavaScript -->
+    <depends>JavaScript</depends>
+    <depends>org.jetbrains.plugins.less</depends>
+    <description><![CDATA[
+      Language Support For React Styled Components
+      https://github.com/styled-components/styled-components
+    ]]></description>
+
+    <change-notes><![CDATA[
+
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="172.0"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <multiHostInjector implementation="com.intellij.StyledComponents.StyledComponentsInjector"/>
+    </extensions>
+</idea-plugin>
