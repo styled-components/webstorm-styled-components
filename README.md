@@ -24,9 +24,9 @@ The plugin only works with Webstorm 2017
 - Inject SCSS in the matched literals
 
 # TODO
-- Add installation instructions
 - Treat ES6 Interpolation in property position as a css value
 - Smart Indentation when opening backticks and pressing enter.
+- Autocomplete in SCSS injected regions
 
 # License (MIT)
 Copyright 2017 Hossam Saraya
