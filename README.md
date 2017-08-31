@@ -6,10 +6,10 @@ https://github.com/styled-components/styled-components/issues/176
 
 # Installation
 An alpha version is here! Here are the steps you need for installations
-- Download the alpha release from here [v1.0-alpha](https://github.com/styled-components/webstorm-styled-components/archive/v1.0-alpha.zip)
+- Download the latest release from here https://github.com/styled-components/webstorm-styled-components/releases/
 - Extract the archive
 - In Webstorm, Hit <kbd>CMD</kbd>+<kbd>SHIFT</kbd>+<kbd>A</kbd> to bring up actions pane. Then select *Add Plugin From Disk*
-- Select `webstorm-styled-components.jar` to install the plugin
+- Select `webstorm-styled-components.zip` to install the plugin
 - You should find your StyledComponents instances highlighted automatically
 
 # Known Issues
@@ -18,15 +18,8 @@ The plugin only works with Webstorm 2017
 # Current Progress
 ![alt text](https://d26dzxoao6i3hh.cloudfront.net/items/1Z0q2R2Y3F0b0H091436/Image%202017-08-30%20at%204.23.48%20PM.png?v=589202df)
 
-# Done
-- Capture tagged template literals for styled components (starting with `styled.*`, `styled()`, `keyframes`)
-- Filter ES6 interpolations in selector position (Otherwise SCSS would complain about incorrect syntax)
-- Inject SCSS in the matched literals
-
 # TODO
-- Treat ES6 Interpolation in property position as a css value
 - Smart Indentation when opening backticks and pressing enter.
-- Autocomplete in SCSS injected regions
 
 # License (MIT)
 Copyright 2017 Hossam Saraya
