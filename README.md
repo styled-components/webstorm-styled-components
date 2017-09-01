@@ -31,12 +31,12 @@ The plugin only works with the JetBrains IDEs version 2017.2 or above.
 
 Semicolons at the end on the line should be outside the string, e.g. `color: ${props => props.primary ? 'white' : 'palevioletred'};`
 
-## Contribution
+# Contributing to the plugin
 Please report any issue with the plugin on [GitHub](https://github.com/styled-components/webstorm-styled-components/issues). We welcome your pull requests.
 
 The plugin is written in [Kotlin](https://kotlinlang.org/) and uses [Gradle](https://gradle.org/). Check out this [tutorial](http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html) on how to run and build the plugins for the IntelliJ IDEA platform with Gradle.
 
-# TODO
+# Todo
 - Smart Indentation when opening backticks and pressing enter.
 
 # License (MIT)
