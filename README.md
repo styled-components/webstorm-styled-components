@@ -4,10 +4,8 @@ Support for styled-components 💅 in WebStorm
 The plugin can be installed in WebStorm, IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine v2017.2 and above.
 
 # Installation
-To install the plugin:
-- Download the latest [release](https://github.com/styled-components/webstorm-styled-components/releases/)
-- In WebStorm, hit <kbd>Cmd</kbd>/<kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>A</kbd> to bring up the actions pane. Then select *Add Plugin From Disk*
-- Select `webstorm-styled-components.zip` to install the plugin
+The plugin can be installed from the IDE plugin manager window. It's available under the name `Styled Components`.
+
 
 # Features
 With this plugin you can enjoy the full coding assistance for styled-components 💅
