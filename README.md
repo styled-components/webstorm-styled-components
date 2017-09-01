@@ -1,32 +1,43 @@
 # webstorm-styled-components
-React Styled Components Language Support in IntelliJ/Webstorm
+Support for styled-components 💅 in WebStorm
 
-# Motivation
-https://github.com/styled-components/styled-components/issues/176
+The plugin can be installed in WebStorm, IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine v2017.2 and above.
 
 # Installation
-An alpha version is here! Here are the steps you need for installations
-- Download the alpha release from here [v1.0-alpha](https://github.com/styled-components/webstorm-styled-components/archive/v1.0-alpha.zip)
-- Extract the archive
-- In Webstorm, Hit <kbd>CMD</kbd>+<kbd>SHIFT</kbd>+<kbd>A</kbd> to bring up actions pane. Then select *Add Plugin From Disk*
-- Select `webstorm-styled-components.jar` to install the plugin
-- You should find your StyledComponents instances highlighted automatically
+To install the plugin:
+- Download the latest (release)[https://github.com/styled-components/webstorm-styled-components/releases/]
+- In WebStorm, hit <kbd>Cmd</kbd>/<kdb>Ctrl</kdb>-<kbd>Shift</kbd>-<kbd>A</kbd> to bring up the actions pane. Then select *Add Plugin From Disk*
+- Select `webstorm-styled-components.zip` to install the plugin
 
-# Known Issues
-The plugin only works with Webstorm 2017
+# Features
+With this plugin you can enjoy the full coding assistance for styled-components 💅
 
-# Current Progress
-![alt text](https://d26dzxoao6i3hh.cloudfront.net/items/1Z0q2R2Y3F0b0H091436/Image%202017-08-30%20at%204.23.48%20PM.png?v=589202df)
+- Start typing to get code completion for CSS properties and values
 
-# Done
-- Capture tagged template literals for styled components (starting with `styled.*`, `styled()`, `keyframes`)
-- Filter ES6 interpolations in selector position (Otherwise SCSS would complain about incorrect syntax)
-- Inject SCSS in the matched literals
+<img src="https://blog.jetbrains.com/webstorm/files/2017/09/ws-st-comp-css-completion.png" width=680>
+
+- Hit <kbd>Alt</kbd>-<kbd>Enter</kbd> to see available intentions and quick-fixes
+
+<img src="https://blog.jetbrains.com/webstorm/files/2017/09/ws-st-comp-intentions.png" width=680>
+
+- Start typing in the interpolation to see completion suggestions for JavaScript variables, methods and functions
+
+<img src="https://blog.jetbrains.com/webstorm/files/2017/09/ws-st-comp-js-completion.png" width=680>
+
+- Cmd/Ctrl-click on the JavaScript symbol to do to its definition
+
+# Limitations
+The plugin only works with the JetBrains IDEs version 2017.2 or above.
+
+Semicolons at the end on the line should be outside the string, e.g. `color: ${props => props.primary ? 'white' : 'palevioletred'};`
+
+## Contribution
+Please report any issue with the plugin on [GitHub](https://github.com/styled-components/webstorm-styled-components/issues). We welcome your pull requests.
+
+The plugin is written in [Kotlin](https://kotlinlang.org/) and uses [Gradle](https://gradle.org/). Check out this [tutorial](http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html) on how to run and build the plugins for the IntelliJ IDEA platform with Gradle.
 
 # TODO
-- Treat ES6 Interpolation in property position as a css value
 - Smart Indentation when opening backticks and pressing enter.
-- Autocomplete in SCSS injected regions
 
 # License (MIT)
 Copyright 2017 Hossam Saraya
