@@ -5,7 +5,7 @@ The plugin can be installed in WebStorm, IntelliJ IDEA Ultimate, PhpStorm, PyCha
 
 # Installation
 To install the plugin:
-- Download the latest (release)[https://github.com/styled-components/webstorm-styled-components/releases/]
+- Download the latest [release](https://github.com/styled-components/webstorm-styled-components/releases/)
 - In WebStorm, hit <kbd>Cmd</kbd>/<kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>A</kbd> to bring up the actions pane. Then select *Add Plugin From Disk*
 - Select `webstorm-styled-components.zip` to install the plugin
 
@@ -27,9 +27,9 @@ With this plugin you can enjoy the full coding assistance for styled-components 
 - Cmd/Ctrl-click on the JavaScript symbol to do to its definition
 
 # Limitations
-The plugin only works with the JetBrains IDEs version 2017.2 or above.
-
-Semicolons at the end on the line should be outside the string, e.g. `color: ${props => props.primary ? 'white' : 'palevioletred'};`
+- The plugin only works with the JetBrains IDEs version 2017.2 or above.
+- It is not yet available on [JetBrains Plugin Repository](https://plugins.jetbrains.com/). When installing the plugin from disk, you won't get update notifications for it.
+- Semicolons at the end on the line should be outside the string, e.g. `color: ${props => props.primary ? 'white' : 'palevioletred'};`
 
 # Contributing to the plugin
 Please report any issue with the plugin on [GitHub](https://github.com/styled-components/webstorm-styled-components/issues). We welcome your pull requests.
