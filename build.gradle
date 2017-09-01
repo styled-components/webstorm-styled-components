@@ -8,13 +8,17 @@ repositories {
 }
 
 intellij {
+    //defines the version of IDEA distribution that should be used as a dependency
     version 'IU-2017.2'
+    // plugins to be used as build dependencies
     plugins = ['JavaScriptLanguage', 'CSS', 'less']
+    //name is used for zip archive when building plugin
     pluginName 'webstorm-styled-components'
     downloadSources false
 }
 
 sourceSets {
+    //mark directory as test sources
     test {
         java.srcDir 'src/test'
     }
