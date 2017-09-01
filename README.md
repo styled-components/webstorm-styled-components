@@ -34,7 +34,25 @@ With this plugin you can enjoy the full coding assistance for styled-components 
 # Contributing to the plugin
 Please report any issue with the plugin on [GitHub](https://github.com/styled-components/webstorm-styled-components/issues). We welcome your pull requests.
 
-The plugin is written in [Kotlin](https://kotlinlang.org/) and uses [Gradle](https://gradle.org/). Check out this [tutorial](http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html) on how to run and build the plugins for the IntelliJ IDEA platform with Gradle.
+The plugin is written in [Kotlin](https://kotlinlang.org/) and uses [Gradle](https://gradle.org/).
+
+**To start contributing**
+1. Clone this repository.
+2. Open the resulting directory in a recent version of Intellij IDEA (2017.*) using 'Open project'.
+3. In the 'Import Project from Gradle' dialog, accept the default settings.
+
+* To **run tests** use `test` task (from the IDEA UI search for 'Execute Gradle Task' and select `test` or run `./gradlew test` from the command line)
+
+* To **launch IDEA** with the plugin built from your current sources use `runIde`
+
+* To **prepare a zip archive** for deployment use `buildPlugin`
+
+The project structure and dependencies are defined in [build.gradle](https://github.com/styled-components/webstorm-styled-components/blob/master/build.gradle).
+
+**Useful links**
+* [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin) documentation on available Gradle tasks and build.gradle configuration options
+* [IDEA SDK documentation](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started.html) describes IDEA plugin structure in general
+* [Kotlin language reference](https://kotlinlang.org/docs/reference/) 
 
 # Todo
 - Smart Indentation when opening backticks and pressing enter.
