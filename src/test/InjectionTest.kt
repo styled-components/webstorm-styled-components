@@ -100,12 +100,18 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
                 "  }\n")
     }
 
-    private fun doTest(fileContent: String, expected: String) {
+    fun testTemplateArgsAtStartEndOfString() {
+        doTest("let atStart = styled.div`\${getPropName()}:red`\n" +
+                "let atEnd = styled.div`color:\${getColor()}`\n",
+                "div {EXTERNAL_FRAGMENT:red}",
+                "div {color:EXTERNAL_FRAGMENT}")
+    }
+
+    private fun doTest(fileContent: String, vararg expected: String) {
         myFixture.setCaresAboutInjection(true)
         val file = myFixture.configureByText("dummy.es6", fileContent)
         val injections = collectInjectedPsiContents(file)
-        Assert.assertEquals(1, injections.size)
-        Assert.assertEquals(expected, injections[0])
+        Assert.assertEquals(expected.toList(), injections)
     }
 
     private fun collectInjectedPsiContents(file: PsiFile): List<String> {
