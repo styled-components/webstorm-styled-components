@@ -8,6 +8,7 @@ import com.intellij.openapi.util.text.StringUtil
 import com.intellij.patterns.ElementPattern
 import com.intellij.patterns.PatternCondition
 import com.intellij.patterns.PlatformPatterns
+import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ProcessingContext
 import com.intellij.util.SmartList
 import com.intellij.util.containers.ContainerUtil
@@ -51,7 +52,9 @@ fun getReferenceParts(jsReferenceExpression: JSReferenceExpression): List<String
         val name = ref.referenceName
         if (StringUtil.isEmptyOrSpaces(name)) return ContainerUtil.emptyList()
         nameParts.add(name)
-        ref = ref.qualifier as JSReferenceExpression?
+        val qualifier = ref.qualifier
+        ref = qualifier as? JSReferenceExpression
+                ?: PsiTreeUtil.findChildOfType(qualifier, JSReferenceExpression::class.java)
     }
     Collections.reverse(nameParts)
     return nameParts

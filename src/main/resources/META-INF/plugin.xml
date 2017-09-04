@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
     <name>Styled Components</name>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
@@ -11,8 +11,7 @@
     <depends>JavaScript</depends>
     <depends>org.jetbrains.plugins.less</depends>
     <description><![CDATA[
-      Language Support For React Styled Components
-      https://github.com/styled-components/styled-components
+      Language Support For <a href="https://github.com/styled-components/styled-components">React Styled Components</a>
     ]]></description>
 
     <change-notes><![CDATA[

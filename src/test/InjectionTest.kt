@@ -8,7 +8,6 @@ import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
 
 class InjectionTest : LightCodeInsightFixtureTestCase() {
-
     fun testSimpleComponent() {
         doTest("const Title = styled.h1`\n" +
                 "  font-size: 1.5em;\n" +
@@ -25,8 +24,7 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
                 "   color: \${props => props.primary ? 'white' : 'palevioletred'};\n" +
                 "    " +
                 "    font-size: 1em;\n" +
-                "`;",
-                "div {\n" +
+                "`;","div {\n" +
                         "    /* Adapt the colours based on primary prop */\n" +
                         "   background: EXTERNAL_FRAGMENT;\n" +
                         "   color: EXTERNAL_FRAGMENT;\n" +
@@ -45,6 +43,15 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
                 "    color: palevioletred;\n" +
                 "`;", "div {\n" +
                 "    color: palevioletred;\n" +
+                "}")
+    }
+    
+    fun testComplexExpression2() {
+        doTest("const ContactMenuIcon = ((styled(Icon)))" +
+                ".attrs({ iconName: 'contact_card' })`\n" +
+                "  line-height: 0;\n" +
+                "`", "div {\n" +
+                "  line-height: 0;\n" +
                 "}")
     }
 
