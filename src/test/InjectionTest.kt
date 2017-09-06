@@ -8,6 +8,12 @@ import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
 
 class InjectionTest : LightCodeInsightFixtureTestCase() {
+    
+    fun testTemplateArgumentIsWholeRange() {
+        doTest("let css = css`\${someVariable}`")
+        doTest("let globalCss = injectGlobal`\${someVariable}`")
+    }
+
     fun testCss() {
         doTest("let css = css`\n" +
                 "  color:red;\n" +

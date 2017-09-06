@@ -38,6 +38,8 @@ class StyledComponentsInjector : MultiHostInjector {
         val acceptedPattern = places.find { (elementPattern) -> elementPattern.accepts(injectionHost) }
         if (acceptedPattern != null) {
             val stringPlaces = getInjectionPlaces(injectionHost)
+            if (stringPlaces.isEmpty())
+                return
             registrar.startInjecting(LESSLanguage.INSTANCE)
             stringPlaces.forEachIndexed { index, (prefix, range, suffix) ->
                 val thePrefix = if (index == 0) acceptedPattern.prefix + prefix.orEmpty() else prefix
