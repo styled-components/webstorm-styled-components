@@ -8,6 +8,16 @@ import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
 
 class InjectionTest : LightCodeInsightFixtureTestCase() {
+    fun testCss() {
+        doTest("let css = css`\n" +
+                "  color:red;\n" +
+                "  width:100px;\n" +
+                "  height:100px;`", "div {\n" +
+                "  color:red;\n" +
+                "  width:100px;\n" +
+                "  height:100px;}")
+    }
+
     fun testSimpleComponent() {
         doTest("const Title = styled.h1`\n" +
                 "  font-size: 1.5em;\n" +
