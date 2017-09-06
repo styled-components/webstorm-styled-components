@@ -4,8 +4,7 @@ Support for styled-components 💅 in WebStorm
 The plugin can be installed in WebStorm, IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine v2017.2 and above.
 
 # Installation
-The plugin can be installed from the IDE plugin manager window. It's available under the name `Styled Components`.
-
+To install the plugin open the IDE `Preferences | Plugins`, then click `Browse repositories...` and search for `Styled Components`.
 
 # Features
 With this plugin you can enjoy the full coding assistance for styled-components 💅
@@ -26,7 +25,6 @@ With this plugin you can enjoy the full coding assistance for styled-components 
 
 # Limitations
 - The plugin only works with the JetBrains IDEs version 2017.2 or above.
-- It is not yet available on [JetBrains Plugin Repository](https://plugins.jetbrains.com/). When installing the plugin from disk, you won't get update notifications for it.
 - Semicolons at the end on the line should be outside the string, e.g. `color: ${props => props.primary ? 'white' : 'palevioletred'};`
 
 # Contributing to the plugin
