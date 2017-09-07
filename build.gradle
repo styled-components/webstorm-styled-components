@@ -15,6 +15,7 @@ intellij {
     //name is used for zip archive when building plugin
     pluginName 'webstorm-styled-components'
     downloadSources false
+    updateSinceUntilBuild false
 }
 
 sourceSets {

@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
     <name>Styled Components</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
@@ -19,7 +19,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="172.0"/>
+    <idea-version since-build="172.3317"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <multiHostInjector implementation="com.intellij.StyledComponents.StyledComponentsInjector"/>
