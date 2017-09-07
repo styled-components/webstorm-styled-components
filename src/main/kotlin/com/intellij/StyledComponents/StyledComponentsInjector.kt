@@ -38,10 +38,12 @@ class StyledComponentsInjector : MultiHostInjector {
         val acceptedPattern = places.find { (elementPattern) -> elementPattern.accepts(injectionHost) }
         if (acceptedPattern != null) {
             val stringPlaces = getInjectionPlaces(injectionHost)
+            if (stringPlaces.isEmpty())
+                return
             registrar.startInjecting(LESSLanguage.INSTANCE)
             stringPlaces.forEachIndexed { index, (prefix, range, suffix) ->
-                val thePrefix = if (index == 0) acceptedPattern.prefix else prefix
-                val theSuffix = if (index == stringPlaces.size - 1) acceptedPattern.suffix else suffix
+                val thePrefix = if (index == 0) acceptedPattern.prefix + prefix.orEmpty() else prefix
+                val theSuffix = if (index == stringPlaces.size - 1) suffix.orEmpty() + acceptedPattern.suffix else suffix
                 registrar.addPlace(thePrefix, theSuffix, injectionHost, range)
             }
             registrar.doneInjecting()
@@ -61,6 +63,6 @@ class StyledComponentsInjector : MultiHostInjector {
         else result[result.size - 1]
     }
     data class PlaceInfo(val elementPattern: ElementPattern<JSStringTemplateExpression>,
-                         val prefix: String? = null,
-                         val suffix: String? = null)
+                         val prefix: String = "",
+                         val suffix: String = "")
 }
