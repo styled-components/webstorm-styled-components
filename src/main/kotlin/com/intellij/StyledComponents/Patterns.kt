@@ -1,5 +1,6 @@
 package com.intellij.StyledComponents
 
+import com.intellij.lang.javascript.psi.JSCallExpression
 import com.intellij.lang.javascript.psi.JSExpression
 import com.intellij.lang.javascript.psi.JSReferenceExpression
 import com.intellij.lang.javascript.psi.ecma6.ES6TaggedTemplateExpression
@@ -34,6 +35,7 @@ fun withReferenceName(name: String): ElementPattern<JSReferenceExpression> {
 }
 
 fun referenceExpression() = PlatformPatterns.psiElement(JSReferenceExpression::class.java)!!
+fun callExpression() = PlatformPatterns.psiElement(JSCallExpression::class.java)!!
 
 fun withNameStartingWith(vararg components: String): ElementPattern<JSReferenceExpression> {
     val componentsList = ContainerUtil.list(*components)

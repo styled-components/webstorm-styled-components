@@ -22,6 +22,7 @@ class StyledComponentsInjector : MultiHostInjector {
                         PlatformPatterns.psiElement(JSExpression::class.java)
                                 .withFirstChild(styledPattern))), "div {", "}"),
                 PlaceInfo(taggedTemplate(withReferenceName("extend")), "div {", "}"),
+                PlaceInfo(taggedTemplate(callExpression().withChild(withReferenceName("attrs"))), "div {", "}"),
                 PlaceInfo(taggedTemplate("css"), "div {", "}"),
                 PlaceInfo(taggedTemplate("injectGlobal")),
                 PlaceInfo(taggedTemplate("keyframes"), "@keyframes foo {", "}")
