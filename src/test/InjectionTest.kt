@@ -105,6 +105,15 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
                         "}")
     }
 
+    fun testComponentAttrs() {
+        doTest("const div = styled.div;\n" +
+                "const FilterIcon = div.attrs({ iconName: 'filter' })`\n" +
+                "  line-height: 0;\n" +
+                "`", "div {\n" +
+                "  line-height: 0;\n" +
+                "}")
+    }
+
     fun testInjectGlobal() {
         doTest("injectGlobal`\n" +
                 "  div{\n" +
