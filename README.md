@@ -21,7 +21,7 @@ With this plugin you can enjoy the full coding assistance for styled-components 
 
 <img src="https://blog.jetbrains.com/webstorm/files/2017/09/ws-st-comp-js-completion.png" width=680>
 
-- Cmd/Ctrl-click on the JavaScript symbol to do to its definition
+- Cmd/Ctrl-click on the JavaScript symbol to go to its definition
 
 # Limitations
 - The plugin only works with the JetBrains IDEs version 2017.2 or above.
