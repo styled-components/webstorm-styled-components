@@ -1,5 +1,7 @@
 package com.intellij.StyledComponents
 
+import com.intellij.lang.javascript.JSTokenTypes
+import com.intellij.lang.javascript.psi.JSBinaryExpression
 import com.intellij.lang.javascript.psi.JSCallExpression
 import com.intellij.lang.javascript.psi.JSExpression
 import com.intellij.lang.javascript.psi.JSReferenceExpression
@@ -24,7 +26,15 @@ fun taggedTemplate(tagPattern: ElementPattern<out JSExpression>): ElementPattern
             .withParent(PlatformPatterns.psiElement(ES6TaggedTemplateExpression::class.java)
                     .withChild(tagPattern))
 }
-
+fun genericTaggedTemplate(tagPattern: ElementPattern<out JSExpression>): ElementPattern<JSStringTemplateExpression> {
+    return PlatformPatterns.psiElement(JSStringTemplateExpression::class.java)
+            .withParent(PlatformPatterns.psiElement(JSBinaryExpression::class.java)
+                    .withChild(PlatformPatterns.psiElement(JSBinaryExpression::class.java)
+                            .withChild(PlatformPatterns.psiElement(JSReferenceExpression::class.java)
+                                    .withChild(tagPattern))
+                            .withChild(PlatformPatterns.psiElement(JSTokenTypes.LT)))
+                    .withChild(PlatformPatterns.psiElement(JSTokenTypes.GT)))
+}
 fun withReferenceName(name: String): ElementPattern<JSReferenceExpression> {
     return referenceExpression()
             .with(object : PatternCondition<JSReferenceExpression>("referenceName") {
