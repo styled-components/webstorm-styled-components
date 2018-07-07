@@ -24,10 +24,8 @@ class InterpolationArgumentsErrorFilter : HighlightErrorFilter(), HighlightInfoF
         if (highlightInfo.severity === HighlightSeverity.WARNING
                 || highlightInfo.severity === HighlightSeverity.WEAK_WARNING
                 || highlightInfo.severity === HighlightSeverity.ERROR) {
-            return acceptedRanges.any { range ->
-                highlightInfo.startOffset > range.startOffset
-                        && highlightInfo.endOffset < range.endOffset
-            }
+            return acceptedRanges.any { highlightInfo.startOffset > it.startOffset
+                    && highlightInfo.endOffset < it.endOffset }
         }
         return true
     }

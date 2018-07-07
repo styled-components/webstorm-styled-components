@@ -24,6 +24,20 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
                 "  height:100px;}")
     }
 
+    fun testGenericTaggedTemplate() {
+        val fileContent = """
+            const Div = styled.div<Props>`
+                color: red;
+            `;
+        """.trimIndent()
+        val expected = """
+            div {
+                color: red;
+            }
+        """.trimIndent()
+        doTest(fileContent, expected)
+    }
+
     fun testSimpleComponent() {
         doTest("const Title = styled.h1`\n" +
                 "  font-size: 1.5em;\n" +

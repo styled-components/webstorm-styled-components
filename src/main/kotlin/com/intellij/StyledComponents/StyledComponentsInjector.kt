@@ -18,6 +18,7 @@ class StyledComponentsInjector : MultiHostInjector {
     companion object {
         private val styledPattern = withNameStartingWith("styled")
         val places: List<PlaceInfo> = listOf(
+                PlaceInfo(genericTaggedTemplate(styledPattern), "div {", "}"),
                 PlaceInfo(taggedTemplate(PlatformPatterns.or(styledPattern,
                         PlatformPatterns.psiElement(JSExpression::class.java)
                                 .withFirstChild(styledPattern))), "div {", "}"),
