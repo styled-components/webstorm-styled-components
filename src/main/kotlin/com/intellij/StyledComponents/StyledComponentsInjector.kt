@@ -26,7 +26,8 @@ class StyledComponentsInjector : MultiHostInjector {
                 PlaceInfo(taggedTemplate("css"), "div {", "}"),
                 PlaceInfo(taggedTemplate("injectGlobal")),
                 PlaceInfo(taggedTemplate("createGlobalStyle")),
-                PlaceInfo(taggedTemplate("keyframes"), "@keyframes foo {", "}")
+                PlaceInfo(taggedTemplate("keyframes"), "@keyframes foo {", "}"),
+                PlaceInfo(taggedTemplate("b"), "div {", "}"),
         )
     }
 
