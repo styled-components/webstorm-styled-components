@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
     <name>Styled Components</name>
-    <version>1.0.5</version>
+    <version>1.0.7</version>
     <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
@@ -13,11 +13,6 @@
     <description><![CDATA[
       Language Support For <a href="https://github.com/styled-components/styled-components">React Styled Components</a>
     ]]></description>
-
-    <change-notes><![CDATA[
-
-    ]]>
-    </change-notes>
 
     <idea-version since-build="172.3317"/>
 
