@@ -1,13 +1,13 @@
-import com.intellij.lang.javascript.psi.JSRecursiveElementVisitor
+import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiLanguageInjectionHost
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
+import com.intellij.psi.util.PsiTreeUtil
+import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
 import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
 
-class InjectionTest : LightCodeInsightFixtureTestCase() {
+class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
     
     fun testTemplateArgumentIsWholeRange() {
         doTest("let css = css`\${someVariable}`")
@@ -145,15 +145,15 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
 
     private fun collectInjectedPsiFiles(file: PsiFile): List<PsiElement> {
         val result = ContainerUtil.newLinkedHashSet<PsiFile>()
-        file.accept(object : JSRecursiveElementVisitor() {
-            override fun visitElement(element: PsiElement) {
-                super.visitElement(element)
-                val host = element as? PsiLanguageInjectionHost
-                if (host != null) {
-                    InjectedLanguageUtil.enumerate(host) { injectedPsi, _ -> result.add(injectedPsi) }
-                }
+        PsiTreeUtil.processElements(file) {
+            val host = it as? PsiLanguageInjectionHost
+            if (host != null) {
+                InjectedLanguageManager.getInstance(host.project)
+                        .enumerate(host) { injectedPsi, _ -> result.add(injectedPsi) }
             }
-        })
+            true
+        }
+
         return ContainerUtil.newArrayList<PsiElement>(result)
     }
 }
