@@ -1,4 +1,4 @@
-package com.intellij.StyledComponents
+package com.intellij.styledComponents
 
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.codeInsight.daemon.impl.HighlightInfoFilter

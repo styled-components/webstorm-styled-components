@@ -17,8 +17,8 @@
     <idea-version since-build="172.3317"/>
 
     <extensions defaultExtensionNs="com.intellij">
-        <multiHostInjector implementation="com.intellij.StyledComponents.StyledComponentsInjector"/>
-        <highlightErrorFilter implementation="com.intellij.StyledComponents.InterpolationArgumentsErrorFilter"/>
-        <daemon.highlightInfoFilter implementation="com.intellij.StyledComponents.InterpolationArgumentsErrorFilter"/>
+        <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
+        <highlightErrorFilter implementation="com.intellij.styledComponents.InterpolationArgumentsErrorFilter"/>
+        <daemon.highlightInfoFilter implementation="com.intellij.styledComponents.InterpolationArgumentsErrorFilter"/>
     </extensions>
 </idea-plugin>

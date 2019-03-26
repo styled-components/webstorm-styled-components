@@ -1,4 +1,4 @@
-package com.intellij.StyledComponents
+package com.intellij.styledComponents
 
 import com.intellij.lang.javascript.psi.JSCallExpression
 import com.intellij.lang.javascript.psi.JSExpression

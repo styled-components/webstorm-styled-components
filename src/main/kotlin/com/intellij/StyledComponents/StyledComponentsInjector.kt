@@ -1,4 +1,4 @@
-package com.intellij.StyledComponents
+package com.intellij.styledComponents
 
 import com.intellij.lang.injection.MultiHostInjector
 import com.intellij.lang.injection.MultiHostRegistrar
