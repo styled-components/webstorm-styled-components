@@ -29,9 +29,34 @@ To configure additional tags, search for 'styled-components' in the IDE preferen
 For example, adding a value like `media` will enable CodeInsight for whose tag starts with it, e.g ``media.tablet`padding: 20px;` ``, ``media.desktop`padding: 10px;` ``.
 <img src="/docs/additional_tags.png" width=680>
 
-# Limitations
-- The plugin only works with the JetBrains IDEs version 2017.2 or above.
-- Semicolons at the end on the line should be outside the string, e.g. `color: ${props => props.primary ? 'white' : 'palevioletred'};`
+# FAQ
+- Why is code inside styled-components strings highlighted green?
+
+The IDE highlights injected language fragments by default. The highlighting can be disabled in `Preferences | Editor | Color Scheme | General | Inejcted Language Fragment`.
+- Why is code inside styled-components strings not reformatted?
+ 
+ Formatting template strings with arguments is not currently supported by the IDE. Please follow this [IDE issue](https://youtrack.jetbrains.com/issue/WEB-28540) for updates.
+- Why am I seeing syntax errors after a template argument?
+
+<img src="./docs/error_after_argument.png">
+The IDE's parser tries to determine what syntax element a template string argument replaces (property, value, etc). 
+In some cases, it may be clear from code that at runtime the template argument will be a CSS property but not possible to infer the same statically:
+
+```js
+const getColor = () => condition ? "color: red;" : "color: white;";
+
+styled.div`
+  ${getColor()}
+  padding-right: 10px
+`;
+```
+In such cases, try placing a semicolon after the template argument:
+```js
+styled.div`
+  ${getColor()};
+  padding-right: 10px
+`;
+```
 
 # Contributing to the plugin
 Please report any issue with the plugin on [GitHub](https://github.com/styled-components/webstorm-styled-components/issues). We welcome your pull requests.
@@ -55,9 +80,6 @@ The project structure and dependencies are defined in [build.gradle](https://git
 * [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin) documentation on available Gradle tasks and build.gradle configuration options
 * [IDEA SDK documentation](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started.html) describes IDEA plugin structure in general
 * [Kotlin language reference](https://kotlinlang.org/docs/reference/) 
-
-# Todo
-- Smart Indentation when opening backticks and pressing enter.
 
 # License (MIT)
 Copyright 2017 Hossam Saraya
