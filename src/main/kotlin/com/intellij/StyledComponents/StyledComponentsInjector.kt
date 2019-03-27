@@ -6,7 +6,6 @@ import com.intellij.lang.javascript.psi.JSExpression
 import com.intellij.lang.javascript.psi.ecma6.JSStringTemplateExpression
 import com.intellij.openapi.util.Pair
 import com.intellij.openapi.util.TextRange
-import com.intellij.patterns.ElementPattern
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
@@ -14,16 +13,19 @@ import com.intellij.psi.impl.source.tree.injected.MultiHostRegistrarImpl
 import com.intellij.psi.impl.source.tree.injected.Place
 import org.jetbrains.plugins.less.LESSLanguage
 
+const val COMPONENT_PROPS_PREFIX = "div {"
+const val COMPONENT_PROPS_SUFFIX = "}"
+
 class StyledComponentsInjector : MultiHostInjector {
     companion object {
-        private val styledPattern = withNameStartingWith("styled")
-        val places: List<PlaceInfo> = listOf(
+        private val styledPattern = withNameStartingWith(listOf("styled"))
+        private val builtinPlaces: List<PlaceInfo> = listOf(
                 PlaceInfo(taggedTemplate(PlatformPatterns.or(styledPattern,
                         PlatformPatterns.psiElement(JSExpression::class.java)
-                                .withFirstChild(styledPattern))), "div {", "}"),
-                PlaceInfo(taggedTemplate(withReferenceName("extend")), "div {", "}"),
-                PlaceInfo(taggedTemplate(callExpression().withChild(withReferenceName("attrs"))), "div {", "}"),
-                PlaceInfo(taggedTemplate("css"), "div {", "}"),
+                                .withFirstChild(styledPattern))), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
+                PlaceInfo(taggedTemplate(withReferenceName("extend")), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
+                PlaceInfo(taggedTemplate(callExpression().withChild(withReferenceName("attrs"))), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
+                PlaceInfo(taggedTemplate("css"), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
                 PlaceInfo(taggedTemplate("injectGlobal")),
                 PlaceInfo(taggedTemplate("createGlobalStyle")),
                 PlaceInfo(taggedTemplate("keyframes"), "@keyframes foo {", "}")
@@ -37,7 +39,9 @@ class StyledComponentsInjector : MultiHostInjector {
     override fun getLanguagesToInject(registrar: MultiHostRegistrar, injectionHost: PsiElement) {
         if (injectionHost !is JSStringTemplateExpression)
             return
-        val acceptedPattern = places.find { (elementPattern) -> elementPattern.accepts(injectionHost) }
+        val customInjections = CustomInjectionsConfiguration.instance(injectionHost.project)
+        val acceptedPattern = builtinPlaces.find { (elementPattern) -> elementPattern.accepts(injectionHost) }
+                ?: customInjections.getInjectionPlaces().find { (elementPattern) -> elementPattern.accepts(injectionHost) }
         if (acceptedPattern != null) {
             val stringPlaces = getInjectionPlaces(injectionHost)
             if (stringPlaces.isEmpty())
@@ -64,7 +68,4 @@ class StyledComponentsInjector : MultiHostInjector {
         return if (result == null || result.isEmpty()) null
         else result[result.size - 1]
     }
-    data class PlaceInfo(val elementPattern: ElementPattern<JSStringTemplateExpression>,
-                         val prefix: String = "",
-                         val suffix: String = "")
 }

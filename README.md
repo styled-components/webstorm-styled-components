@@ -23,6 +23,12 @@ With this plugin you can enjoy the full coding assistance for styled-components 
 
 - Cmd/Ctrl-click on the JavaScript symbol to go to its definition
 
+# Configuration
+To configure additional tags, search for 'styled-components' in the IDE preferences, and enter any additional tags to treat as styled components.
+
+For example, adding a value like `media` will enable CodeInsight for whose tag starts with it, e.g ``media.tablet`padding: 20px;` ``, ``media.desktop`padding: 10px;` ``.
+<img src="/docs/additional_tags.png" width=680>
+
 # Limitations
 - The plugin only works with the JetBrains IDEs version 2017.2 or above.
 - Semicolons at the end on the line should be outside the string, e.g. `color: ${props => props.primary ? 'white' : 'palevioletred'};`
