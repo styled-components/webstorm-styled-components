@@ -1,4 +1,4 @@
-package com.intellij.StyledComponents
+package com.intellij.styledComponents
 
 import com.intellij.lang.javascript.psi.JSCallExpression
 import com.intellij.lang.javascript.psi.JSExpression
@@ -37,11 +37,10 @@ fun withReferenceName(name: String): ElementPattern<JSReferenceExpression> {
 fun referenceExpression() = PlatformPatterns.psiElement(JSReferenceExpression::class.java)!!
 fun callExpression() = PlatformPatterns.psiElement(JSCallExpression::class.java)!!
 
-fun withNameStartingWith(vararg components: String): ElementPattern<JSReferenceExpression> {
-    val componentsList = ContainerUtil.list(*components)
+fun withNameStartingWith(names: List<String>): ElementPattern<JSReferenceExpression> {
     return referenceExpression().with(object : PatternCondition<JSReferenceExpression>("nameStartingWith") {
         override fun accepts(referenceExpression: JSReferenceExpression, context: ProcessingContext): Boolean {
-            return ContainerUtil.startsWith(getReferenceParts(referenceExpression), componentsList)
+            return ContainerUtil.startsWith(getReferenceParts(referenceExpression), names)
         }
     })
 }

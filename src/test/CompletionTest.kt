@@ -1,6 +1,6 @@
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
+import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
 
-class CompletionTest : LightCodeInsightFixtureTestCase() {
+class CompletionTest : LightPlatformCodeInsightFixtureTestCase() {
     fun testCompletionAfterInterpolationExpressionInParentheses() {
         myFixture.configureByText("dummy.es6",
                 "const HeroImage = styled(Box)`\n" +

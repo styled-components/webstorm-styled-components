@@ -1,13 +1,16 @@
-import com.intellij.lang.javascript.psi.JSRecursiveElementVisitor
+import com.intellij.lang.injection.InjectedLanguageManager
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.util.Disposer
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiLanguageInjectionHost
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
+import com.intellij.psi.util.PsiTreeUtil
+import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
+import com.intellij.styledComponents.CustomInjectionsConfiguration
 import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
 
-class InjectionTest : LightCodeInsightFixtureTestCase() {
+class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
     
     fun testTemplateArgumentIsWholeRange() {
         doTest("let css = css`\${someVariable}`")
@@ -80,7 +83,6 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
                 "    to{\n" +
                 "      transform:rotate(360deg);\n" +
                 "    }\n" +
-                "`;" +
                 "`;",
                 "@keyframes foo {\n" +
                         "    from{\n" +
@@ -132,11 +134,40 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
                 "div {color:EXTERNAL_FRAGMENT}")
     }
 
+    fun testWithCustomInjectionMediaQuery() {
+        setCustomInjectionsConfiguration("media")
+        doTest("const Container = styled.div`\n" +
+                "  color: #333;\n" +
+                "  \${media.desktop `padding: 0 20px;` };\n" +
+                "`", "div {\n" +
+                "  color: #333;\n" +
+                "  EXTERNAL_FRAGMENT;\n" +
+                "}", "div {padding: 0 20px;}")
+    }
+    
+    fun testCustomInjectionWithComplexTag() {
+        setCustomInjectionsConfiguration("bp")
+        doTest("const Container = styled.div`\n" +
+                "  color: #333;\n" +
+                "  \${bp(media.tablet)`padding: 0 20px;` }\n" +
+                "`", "div {\n" +
+                "  color: #333;\n" +
+                "  EXTERNAL_FRAGMENT\n" +
+                "}", "div {padding: 0 20px;}")
+    }
+
+    private fun setCustomInjectionsConfiguration(vararg prefixes: String) {
+        val configuration = CustomInjectionsConfiguration.instance(myFixture.project)
+        val previousPrefixes = configuration.getTagPrefixes()
+        configuration.setTagPrefixes(arrayOf(*prefixes))
+        Disposer.register(myFixture.testRootDisposable, Disposable { configuration.setTagPrefixes(previousPrefixes) })
+    }
+
     private fun doTest(fileContent: String, vararg expected: String) {
         myFixture.setCaresAboutInjection(true)
         val file = myFixture.configureByText("dummy.es6", fileContent)
-        val injections = collectInjectedPsiContents(file)
-        Assert.assertEquals(expected.toList(), injections)
+        myFixture.testHighlighting(true, false, false)
+        Assert.assertEquals(expected.toList(), collectInjectedPsiContents(file))
     }
 
     private fun collectInjectedPsiContents(file: PsiFile): List<String> {
@@ -145,15 +176,15 @@ class InjectionTest : LightCodeInsightFixtureTestCase() {
 
     private fun collectInjectedPsiFiles(file: PsiFile): List<PsiElement> {
         val result = ContainerUtil.newLinkedHashSet<PsiFile>()
-        file.accept(object : JSRecursiveElementVisitor() {
-            override fun visitElement(element: PsiElement) {
-                super.visitElement(element)
-                val host = element as? PsiLanguageInjectionHost
-                if (host != null) {
-                    InjectedLanguageUtil.enumerate(host) { injectedPsi, _ -> result.add(injectedPsi) }
-                }
+        PsiTreeUtil.processElements(file) {
+            val host = it as? PsiLanguageInjectionHost
+            if (host != null) {
+                InjectedLanguageManager.getInstance(host.project)
+                        .enumerate(host) { injectedPsi, _ -> result.add(injectedPsi) }
             }
-        })
+            true
+        }
+
         return ContainerUtil.newArrayList<PsiElement>(result)
     }
 }

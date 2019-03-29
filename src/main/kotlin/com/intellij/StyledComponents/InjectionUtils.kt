@@ -1,4 +1,4 @@
-package com.intellij.StyledComponents
+package com.intellij.styledComponents
 
 import com.intellij.lang.javascript.JSTokenTypes
 import com.intellij.lang.javascript.psi.JSLiteralExpression

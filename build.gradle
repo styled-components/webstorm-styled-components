@@ -1,15 +1,28 @@
-plugins {
-    id 'org.jetbrains.intellij' version '0.2.16'
-    id 'org.jetbrains.kotlin.jvm' version '1.1.3'
+buildscript {
+    ext.kotlin_version = '1.3.21'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
+plugins {
+    id 'org.jetbrains.intellij' version '0.3.9'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.61'
+}
+apply plugin: 'kotlin'
+apply plugin: 'org.jetbrains.intellij'
 
 repositories {
     mavenCentral()
 }
 
 intellij {
-    //defines the version of IDEA distribution that should be used as a dependency
-    version 'IU-2017.2'
+    //defines the version of IDEA distribution that the plugin will be built against
+    version 'IU-2018.1'
     // plugins to be used as build dependencies
     plugins = ['JavaScriptLanguage', 'CSS', 'less']
     //name is used for zip archive when building plugin
@@ -23,4 +36,12 @@ sourceSets {
     test {
         java.srcDir 'src/test'
     }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
