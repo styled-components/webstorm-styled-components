@@ -3,14 +3,16 @@ package com.intellij.styledComponents
 import com.intellij.lang.injection.MultiHostInjector
 import com.intellij.lang.injection.MultiHostRegistrar
 import com.intellij.lang.javascript.psi.JSExpression
-import com.intellij.lang.javascript.psi.ecma6.JSStringTemplateExpression
+import com.intellij.lang.javascript.psi.JSLiteralExpression
 import com.intellij.openapi.util.Pair
 import com.intellij.openapi.util.TextRange
 import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.impl.source.tree.injected.MultiHostRegistrarImpl
 import com.intellij.psi.impl.source.tree.injected.Place
+import com.intellij.psi.xml.XmlAttributeValue
 import org.jetbrains.plugins.less.LESSLanguage
 
 const val COMPONENT_PROPS_PREFIX = "div {"
@@ -23,6 +25,7 @@ class StyledComponentsInjector : MultiHostInjector {
                 PlaceInfo(taggedTemplate(PlatformPatterns.or(styledPattern,
                         PlatformPatterns.psiElement(JSExpression::class.java)
                                 .withFirstChild(styledPattern))), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
+                PlaceInfo(jsxAttribute("css"), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
                 PlaceInfo(taggedTemplate(withReferenceName("extend")), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
                 PlaceInfo(taggedTemplate(callExpression().withChild(withReferenceName("attrs"))), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
                 PlaceInfo(taggedTemplate("css"), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX),
@@ -33,11 +36,11 @@ class StyledComponentsInjector : MultiHostInjector {
     }
 
     override fun elementsToInjectIn(): MutableList<out Class<out PsiElement>> {
-        return mutableListOf(JSStringTemplateExpression::class.java)
+        return mutableListOf(JSLiteralExpression::class.java, XmlAttributeValue::class.java)
     }
 
     override fun getLanguagesToInject(registrar: MultiHostRegistrar, injectionHost: PsiElement) {
-        if (injectionHost !is JSStringTemplateExpression)
+        if (injectionHost !is PsiLanguageInjectionHost)
             return
         val customInjections = CustomInjectionsConfiguration.instance(injectionHost.project)
         val acceptedPattern = builtinPlaces.find { (elementPattern) -> elementPattern.accepts(injectionHost) }

@@ -1,18 +1,18 @@
 package com.intellij.styledComponents
 
 import com.intellij.lang.javascript.JSTokenTypes
-import com.intellij.lang.javascript.psi.JSLiteralExpression
 import com.intellij.lang.javascript.psi.ecma6.JSStringTemplateExpression
 import com.intellij.openapi.util.Key
 import com.intellij.openapi.util.TextRange
+import com.intellij.psi.PsiElement
 import com.intellij.util.ArrayUtil
 import com.intellij.util.containers.ContainerUtil
-import java.util.ArrayList
+import java.util.*
 
 val INJECTED_FILE_RANGES_KEY = Key<List<TextRange>?>("INJECTED_FILE_RANGES_KEY")
 private val EXTERNAL_FRAGMENT = "EXTERNAL_FRAGMENT"
 
-fun getInjectionPlaces(myQuotedLiteral: JSLiteralExpression): List<StringPlace> {
+fun getInjectionPlaces(myQuotedLiteral: PsiElement): List<StringPlace> {
     if (myQuotedLiteral is JSStringTemplateExpression) {
         val templateExpression = myQuotedLiteral
         val ranges = templateExpression.stringRanges
