@@ -22,7 +22,7 @@
         ]]>
     </change-notes>
 
-    <idea-version since-build="181"/>
+    <idea-version since-build="183"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
@@ -33,6 +33,6 @@
                              instance="com.intellij.styledComponents.StyledComponentsConfigurable"
                              id="styled-components"
                              displayName="styled-components"/>
-
+        <xml.attributeDescriptorsProvider implementation="com.intellij.styledComponents.CssPropAttributeDescriptorProvider"/>
     </extensions>
 </idea-plugin>
