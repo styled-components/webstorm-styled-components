@@ -1,8 +1,8 @@
 package com.intellij.styledComponents
 
-import com.intellij.lang.javascript.psi.ecma6.JSStringTemplateExpression
 import com.intellij.patterns.ElementPattern
+import com.intellij.psi.PsiElement
 
-data class PlaceInfo(val elementPattern: ElementPattern<JSStringTemplateExpression>,
+data class PlaceInfo(val elementPattern: ElementPattern<out PsiElement>,
                      val prefix: String = "",
                      val suffix: String = "")

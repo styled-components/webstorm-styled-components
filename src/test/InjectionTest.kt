@@ -5,8 +5,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
 import com.intellij.styledComponents.CustomInjectionsConfiguration
+import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
 import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
 
@@ -161,6 +161,30 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
                 "}", "div {padding: 0 20px;}")
     }
 
+    fun testCssProperty_DoubleQuotedAttributeValue() {
+        doTest("<div css=\"color:red\"/>", "div {color:red}")
+    }
+
+    fun testCssProperty_SingleQuotedAttributeValue() {
+        doTest("<div css='color:red'/>", "div {color:red}")
+    }
+
+    fun testCssProperty_TemplateStringInValue() {
+        doTest("<div css={`color:red`}/>", "div {color:red}")
+    }
+
+    fun testCssProperty_PlainJSStringInValue() {
+        doTest("<div css={'color:red'}/>", "div {color:red}")
+    }
+
+    fun testNoCssPropertyInjectionInHtml() {
+        doTestWithExtension("<div css='color:red'/>", "html", emptyArray())
+    }
+    
+    fun testNoInjectionWithObjectInCssProperty() {
+        doTest("<div css={{color:'red'}}/>")
+    }
+
     private fun setCustomInjectionsConfiguration(vararg prefixes: String) {
         val configuration = CustomInjectionsConfiguration.instance(myFixture.project)
         val previousPrefixes = configuration.getTagPrefixes()
@@ -169,8 +193,12 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
     }
 
     private fun doTest(fileContent: String, vararg expected: String) {
-        myFixture.setCaresAboutInjection(true)
-        val file = myFixture.configureByText("dummy.es6", fileContent)
+        doTestWithExtension(fileContent, "jsx", expected)
+    }
+
+    private fun doTestWithExtension(fileContent: String, extension: String, expected: Array<out String>) {
+        myFixture.setCaresAboutInjection(false)
+        val file = myFixture.configureByText("dummy.$extension", fileContent)
         myFixture.testHighlighting(true, false, false)
         Assert.assertEquals(expected.toList(), collectInjectedPsiContents(file))
     }
