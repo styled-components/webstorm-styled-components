@@ -145,6 +145,11 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
                 "}", "div {padding: 0 20px;}")
     }
     
+    fun testWithUnqualifiedCustomTag() {
+        setCustomInjectionsConfiguration("sc")
+        doTest("const Container = sc`color: #333;`;", "div {color: #333;}")
+    }
+    
     fun testCustomInjectionWithComplexTag() {
         setCustomInjectionsConfiguration("bp")
         doTest("const Container = styled.div`\n" +

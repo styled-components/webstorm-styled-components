@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
     <name>Styled Components</name>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
@@ -13,6 +13,14 @@
     <description><![CDATA[
       Language Support For <a href="https://github.com/styled-components/styled-components">React Styled Components</a>
     ]]></description>
+    <change-notes>
+        <![CDATA[
+        <p>1.0.8:</p>
+        <ul>
+            <li>Custom patterns now apply to simple reference expressions also.</li>
+        </ul>
+        ]]>
+    </change-notes>
 
     <idea-version since-build="181"/>
 

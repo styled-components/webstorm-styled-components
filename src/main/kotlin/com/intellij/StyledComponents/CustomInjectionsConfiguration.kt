@@ -23,9 +23,12 @@ class CustomInjectionsConfiguration : PersistentStateComponent<CustomInjectionsC
 
     private fun updatePatterns(newState: InjectionsState) {
         myPatterns = (newState.prefixes ?: emptyArray()).map {
-            PlaceInfo(taggedTemplate(PlatformPatterns.psiElement(JSExpression::class.java)
-                    .withFirstChild(withNameStartingWith(it.trim().split('.')))
-            ), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX)
+            val referenceExpressionPattern = withNameStartingWith(it.trim().split('.'))
+            val tagPattern = PlatformPatterns.or(
+                    referenceExpressionPattern,
+                    PlatformPatterns.psiElement(JSExpression::class.java).withFirstChild(referenceExpressionPattern)
+            )
+            PlaceInfo(taggedTemplate(tagPattern), COMPONENT_PROPS_PREFIX, COMPONENT_PROPS_SUFFIX)
         }
     }
 
