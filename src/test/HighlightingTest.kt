@@ -6,8 +6,8 @@ class HighlightingTest : LightPlatformCodeInsightFixtureTestCase() {
     fun testWithoutArguments_ErrorsHighlighted() {
         myFixture.enableInspections(CssInvalidPropertyValueInspection::class.java)
         doTest("var someCss = css`div {\n" +
-                "  color:<error descr=\"a term expected\"> </error>{}\n" +
-                "<error descr=\"Unexpected terms\">}</error>;`")
+                "  color:<error>not-a-color</error>\n" +
+                "}`")
     }
 
     fun testErrorSurroundsInterpolationArgument_NotHighlighted() {
