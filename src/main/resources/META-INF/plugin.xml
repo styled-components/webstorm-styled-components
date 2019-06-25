@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
     <name>Styled Components</name>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
@@ -15,9 +15,9 @@
     ]]></description>
     <change-notes>
         <![CDATA[
-        <p>1.0.8:</p>
+        <p>1.0.9:</p>
         <ul>
-            <li>Custom patterns now apply to simple reference expressions also.</li>
+            <li>Added support for css prop (https://www.styled-components.com/docs/api#css-prop).</li>
         </ul>
         ]]>
     </change-notes>
