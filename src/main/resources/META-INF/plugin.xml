@@ -22,7 +22,7 @@
         ]]>
     </change-notes>
 
-    <idea-version since-build="183"/>
+    <idea-version since-build="183.2153.8"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
