@@ -11,7 +11,7 @@ buildscript {
 }
 plugins {
     id 'org.jetbrains.intellij' version '0.4.8'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.61'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
 }
 apply plugin: 'kotlin'
 apply plugin: 'org.jetbrains.intellij'
@@ -23,6 +23,9 @@ repositories {
 intellij {
     //defines the version of IDEA distribution that the plugin will be built against
     version 'IU-2019.2'
+    //use to build against latest EAP
+//    version 'IU-LATEST-EAP-SNAPSHOT'
+
     // plugins to be used as build dependencies
     plugins = ['JavaScriptLanguage', 'CSS', 'less']
     //name is used for zip archive when building plugin
@@ -40,8 +43,4 @@ sourceSets {
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
