@@ -22,7 +22,7 @@ repositories {
 
 intellij {
     //defines the version of IDEA distribution that the plugin will be built against
-    version 'IU-2018.3'
+    version 'IU-2019.2'
     // plugins to be used as build dependencies
     plugins = ['JavaScriptLanguage', 'CSS', 'less']
     //name is used for zip archive when building plugin
