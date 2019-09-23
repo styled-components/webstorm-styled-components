@@ -9,8 +9,7 @@ import com.intellij.util.ArrayUtil
 import com.intellij.util.containers.ContainerUtil
 import java.util.*
 
-val INJECTED_FILE_RANGES_KEY = Key<List<TextRange>?>("INJECTED_FILE_RANGES_KEY")
-private val EXTERNAL_FRAGMENT = "EXTERNAL_FRAGMENT"
+private const val EXTERNAL_FRAGMENT = "EXTERNAL_FRAGMENT"
 
 fun getInjectionPlaces(myQuotedLiteral: PsiElement): List<StringPlace> {
     if (myQuotedLiteral is JSStringTemplateExpression) {

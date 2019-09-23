@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
     <name>Styled Components</name>
-    <version>1.0.9</version>
+    <version>1.0.11</version>
     <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
@@ -15,19 +15,17 @@
     ]]></description>
     <change-notes>
         <![CDATA[
-        <p>1.0.9:</p>
+        <p>1.0.11:</p>
         <ul>
-            <li>Added support for css prop (https://www.styled-components.com/docs/api#css-prop).</li>
+            <li>Fixes plugin not working in 2019.3 EAP builds.</li>
         </ul>
         ]]>
     </change-notes>
 
-    <idea-version since-build="183.2153.8"/>
+    <idea-version since-build="192"/>
 
     <extensions defaultExtensionNs="com.intellij">
         <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
-        <highlightErrorFilter implementation="com.intellij.styledComponents.InterpolationArgumentsErrorFilter"/>
-        <daemon.highlightInfoFilter implementation="com.intellij.styledComponents.InterpolationArgumentsErrorFilter"/>
         <projectService serviceImplementation="com.intellij.styledComponents.CustomInjectionsConfiguration"/>
         <projectConfigurable parentId="Settings.JavaScript"
                              instance="com.intellij.styledComponents.StyledComponentsConfigurable"
