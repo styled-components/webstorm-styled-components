@@ -185,6 +185,19 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
         doTest("<div css={{color:'red'}}/>")
     }
 
+    fun testStyledJsx() {
+        doTest("<style jsx>{`\n" +
+                "  .container {\n" +
+                "    margin: 0 auto;\n" +
+                "    width: 880px\n" +
+                "  }\n" +
+                "`}</style>", "\n" +
+                "  .container {\n" +
+                "    margin: 0 auto;\n" +
+                "    width: 880px\n" +
+                "  }\n")
+    }
+
     private fun setCustomInjectionsConfiguration(vararg prefixes: String) {
         val configuration = CustomInjectionsConfiguration.instance(myFixture.project)
         val previousPrefixes = configuration.getTagPrefixes()
