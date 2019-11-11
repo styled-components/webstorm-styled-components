@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
-    <name>Styled Components</name>
-    <version>1.0.11</version>
+    <name>Styled Components &amp; Styled JSX</name>
+    <version>1.1</version>
     <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
 
     <!-- Enable plugin for all products -->
@@ -11,13 +11,17 @@
     <depends>JavaScript</depends>
     <depends>org.jetbrains.plugins.less</depends>
     <description><![CDATA[
-      Language Support For <a href="https://github.com/styled-components/styled-components">React Styled Components</a>
+      <p>Adds support for <a href="https://www.styled-components.com/">styled-components</a> and <a href="https://github.com/zeit/styled-jsx">styled-jsx</a>.
+      <ul>
+        <li>Code completion for CSS properties and values inside template literals.
+        <li>Various quick fixes and intentions for CSS when you press Alt-Enter.
+        <li>Completion suggestions for JavaScript variables, methods, and functions and navigation to their definitions with Cmd/Ctrl-click.
     ]]></description>
     <change-notes>
         <![CDATA[
-        <p>1.0.11:</p>
+        <p>1.1:</p>
         <ul>
-            <li>Fixes plugin not working in 2019.3 EAP builds.</li>
+            <li>Added support for <a href="https://github.com/zeit/styled-jsx">styled-jsx.</a></li>
         </ul>
         ]]>
     </change-notes>
