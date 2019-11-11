@@ -89,3 +89,13 @@ fun jsxAttribute(name: String): ElementPattern<out PsiElement> {
 
     return PlatformPatterns.or(stringValuedCssAttribute, jsInCssAttributePattern)
 }
+
+fun jsxBodyText(tagName: String, vararg attributeNames: String): ElementPattern<out PsiElement> {
+    return JSPatterns.jsLiteralExpression()
+            .with(object : PatternCondition<JSLiteralExpression?>("isStringLiteral") {
+                override fun accepts(literal: JSLiteralExpression, context: ProcessingContext?): Boolean {
+                    return literal.isStringLiteral || literal is JSStringTemplateExpression
+                }
+            })
+            .withAncestor(3, xmlTag().withName(tagName).withAnyAttribute(*attributeNames))
+}
