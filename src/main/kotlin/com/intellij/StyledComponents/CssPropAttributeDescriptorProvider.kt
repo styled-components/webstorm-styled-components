@@ -19,8 +19,6 @@ import com.intellij.psi.xml.XmlTag
 import com.intellij.xml.XmlAttributeDescriptor
 import com.intellij.xml.XmlAttributeDescriptorsProvider
 
-private const val BABEL_PLUGIN_NAME = "babel-plugin-styled-components"
-
 private const val STYLED_COMPONENTS_PACKAGE_NAME = "styled-components"
 
 private val JS_STRING_TYPE = JSNamedTypeFactory.createType("string", JSTypeSource.EMPTY, JSTypeContext.INSTANCE)
@@ -60,9 +58,7 @@ class CssPropAttributeDescriptorProvider : XmlAttributeDescriptorsProvider {
         val project = containingFile.project
         return CachedValuesManager.getManager(project).getCachedValue(containingFile) {
             val styledComponentsPackage = getNodePackage(STYLED_COMPONENTS_PACKAGE_NAME, project, virtualFile)
-            val babelPluginPackage = getNodePackage(BABEL_PLUGIN_NAME, project, virtualFile)
             val hasCssProp = styledComponentsPackage?.version?.isGreaterOrEqualThan(4, 0, 0) == true
-                    && babelPluginPackage != null
             CachedValueProvider.Result(hasCssProp, VirtualFileManager.VFS_STRUCTURE_MODIFICATIONS,
                     ProjectRootManager.getInstance(project))
         }
