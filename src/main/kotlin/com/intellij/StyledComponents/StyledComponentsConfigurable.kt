@@ -5,7 +5,7 @@ import com.intellij.lang.javascript.JavascriptLanguage
 import com.intellij.lang.javascript.refactoring.JSNamesValidation
 import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.editor.event.DocumentListener
-import com.intellij.openapi.fileTypes.PlainTextLanguage
+import com.intellij.openapi.fileTypes.PlainTextFileType
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.ComponentValidator
@@ -30,7 +30,7 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
     private val tagsModel = TagsModel()
     private val disposable = Disposer.newDisposable()
     private val myTagPrefixesField = object : JBListTable(JBTable(tagsModel), disposable) {
-        override fun getRowRenderer(p0: Int): JBTableRowRenderer = object : EditorTextFieldJBTableRowRenderer(project, PlainTextLanguage.INSTANCE, disposable) {
+        override fun getRowRenderer(p0: Int): JBTableRowRenderer = object : EditorTextFieldJBTableRowRenderer(project, PlainTextFileType.INSTANCE, disposable) {
             override fun getText(p0: JTable?, index: Int): String = tagsModel.myTags[index]
         }
 
@@ -49,6 +49,7 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
                 add(editor, BorderLayout.NORTH)
                 validator.updateInfo(getErrorText(editor.text)?.let { ValidationInfo(it, editor) })
             }
+
             override fun getFocusableComponents(): Array<JComponent> = arrayOf(preferredFocusedComponent)
             override fun getPreferredFocusedComponent(): JComponent = getComponent(0) as JComponent
 
@@ -72,6 +73,7 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
             }
         }
     }
+
     override fun isModified(): Boolean {
         return !getPrefixesFromUi().contentEquals((myConfiguration.getTagPrefixes()))
     }
