@@ -6,12 +6,12 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.styledComponents.CustomInjectionsConfiguration
-import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
 
-class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
-    
+class InjectionTest : BasePlatformTestCase() {
+
     fun testTemplateArgumentIsWholeRange() {
         doTest("let css = css`\${someVariable}`")
         doTest("let globalCss = injectGlobal`\${someVariable}`")
@@ -43,12 +43,12 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
                 "   color: \${props => props.primary ? 'white' : 'palevioletred'};\n" +
                 "    " +
                 "    font-size: 1em;\n" +
-                "`;","div {\n" +
-                        "    /* Adapt the colours based on primary prop */\n" +
-                        "   background: EXTERNAL_FRAGMENT;\n" +
-                        "   color: EXTERNAL_FRAGMENT;\n" +
-                        "        font-size: 1em;\n" +
-                        "}")
+                "`;", "div {\n" +
+                "    /* Adapt the colours based on primary prop */\n" +
+                "   background: EXTERNAL_FRAGMENT_0;\n" +
+                "   color: EXTERNAL_FRAGMENT_1;\n" +
+                "        font-size: 1em;\n" +
+                "}")
     }
 
     fun testComplexExpression() {
@@ -64,7 +64,7 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
                 "    color: palevioletred;\n" +
                 "}")
     }
-    
+
     fun testComplexExpression2() {
         doTest("const ContactMenuIcon = ((styled(Icon)))" +
                 ".attrs({ iconName: 'contact_card' })`\n" +
@@ -130,26 +130,26 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
     fun testTemplateArgsAtStartEndOfString() {
         doTest("let atStart = styled.div`\${getPropName()}:red`\n" +
                 "let atEnd = styled.div`color:\${getColor()}`\n",
-                "div {EXTERNAL_FRAGMENT:red}",
-                "div {color:EXTERNAL_FRAGMENT}")
+                "div {EXTERNAL_FRAGMENT_0:red}",
+                "div {color:EXTERNAL_FRAGMENT_0}")
     }
 
     fun testWithCustomInjectionMediaQuery() {
         setCustomInjectionsConfiguration("media")
         doTest("const Container = styled.div`\n" +
                 "  color: #333;\n" +
-                "  \${media.desktop `padding: 0 20px;` };\n" +
+                "  \${media.desktop `padding: 0 20px;` }\n" +
                 "`", "div {\n" +
                 "  color: #333;\n" +
-                "  EXTERNAL_FRAGMENT;\n" +
+                "  \n" +
                 "}", "div {padding: 0 20px;}")
     }
-    
+
     fun testWithUnqualifiedCustomTag() {
         setCustomInjectionsConfiguration("sc")
         doTest("const Container = sc`color: #333;`;", "div {color: #333;}")
     }
-    
+
     fun testCustomInjectionWithComplexTag() {
         setCustomInjectionsConfiguration("bp")
         doTest("const Container = styled.div`\n" +
@@ -157,7 +157,7 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
                 "  \${bp(media.tablet)`padding: 0 20px;` }\n" +
                 "`", "div {\n" +
                 "  color: #333;\n" +
-                "  EXTERNAL_FRAGMENT\n" +
+                "  \n" +
                 "}", "div {padding: 0 20px;}")
     }
 
@@ -180,7 +180,7 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
     fun testNoCssPropertyInjectionInHtml() {
         doTestWithExtension("<div css='color:red'/>", "html", emptyArray())
     }
-    
+
     fun testNoInjectionWithObjectInCssProperty() {
         doTest("<div css={{color:'red'}}/>")
     }
@@ -196,6 +196,125 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
                 "    margin: 0 auto;\n" +
                 "    width: 880px\n" +
                 "  }\n")
+    }
+
+    fun testArgumentNestedInjectionBeforeProperty() {
+        doTest("const ErrorDiv = styled.div`\n" +
+                "  \${props =>\n" +
+                "    css`\n" +
+                "      color: red;    \n" +
+                "    `}\n" +
+                "  color: blue; \n" +
+                "`;", "div {\n" +
+                "  \n" +
+                "  color: blue; \n" +
+                "}", "div {\n" +
+                "      color: red;    \n" +
+                "    }"
+        )
+    }
+
+    fun testArgumentNestedInjectionAfterProperty() {
+        doTest("const ErrorDiv = styled.div`\n" +
+                "  color: blue;\n" +
+                "  \${props =>\n" +
+                "    css`\n" +
+                "      color: red;\n" +
+                "    `}\n" +
+                "`;", "div {\n" +
+                "  color: blue;\n" +
+                "  \n" +
+                "}", "div {\n" +
+                "      color: red;\n" +
+                "    }"
+        )
+    }
+
+    fun testArgumentNestedInjectionOnlyArgument() {
+        doTest("const OptionLabel = styled.div`\n" +
+                "  \${(props) => css`\n" +
+                "    margin-bottom: 0.3em;\n" +
+                "  `}\n" +
+                "`;", "div {\n" +
+                "  \n" +
+                "}", "div {\n" +
+                "    margin-bottom: 0.3em;\n" +
+                "  }"
+        )
+    }
+
+    fun testArgumentNestedInjectionLeadingArgument() {
+        doTest("const OptionLabel = styled.div`\${(props) => css`margin-bottom: 0.3em;`} `;",
+                "div { }",
+                "div {margin-bottom: 0.3em;}"
+        )
+    }
+
+    fun testArgumentNestedInjectionTrailingArgument() {
+        doTest("const OptionLabel = styled.div` \${(props) => css`margin-bottom: 0.3em;`}`;",
+                "div { }",
+                "div {margin-bottom: 0.3em;}"
+        )
+    }
+
+    fun testArgumentNestedInjectionLeadingAndTrailingArgument() {
+        doTest("const OptionLabel = styled.div`\${(props) => css`margin-bottom: 0.3em;`} padding: \${(props) => `5px;`}`;",
+                "div { padding: EXTERNAL_FRAGMENT_1}",
+                "div {margin-bottom: 0.3em;}"
+        )
+    }
+
+    fun testArgumentNestedInjectionAdjacentArguments() {
+        doTest("const OptionLabel = styled.div`padding: 3px; " +
+                "\${(props) => css`margin-bottom: 0.3em;`}\${'IGNORED'}\${props => 'display'}: none;`;",
+                "div {padding: 3px; EXTERNAL_FRAGMENT_2: none;}",
+                "div {margin-bottom: 0.3em;}"
+        )
+    }
+
+    fun testArgumentNestedInjectionAdjacentArgumentsLeading() {
+        doTest("const OptionLabel = styled.div`" +
+                "\${(props) => css`margin-bottom: 0.3em;`}\${'margin'}: 20px;\${props => 'display'}: none;`;",
+                "div {margin: 20px;EXTERNAL_FRAGMENT_2: none;}",
+                "div {margin-bottom: 0.3em;}"
+        )
+    }
+
+    fun testArgumentNestedInjectionAdjacentArgumentsTrailing() {
+        doTest("const OptionLabel = styled.div`padding: 3px; " +
+                "\${(props) => css`margin-bottom: 0.3em;`}\${'IGNORED'}\${props => 'display'}: none; \${'background: red'}`;",
+                "div {padding: 3px; EXTERNAL_FRAGMENT_2: none; background: red}",
+                "div {margin-bottom: 0.3em;}"
+        )
+    }
+
+    fun testArgumentNestedInjectionAdjacentArgumentsWithInjectionInBetween() {
+        doTest("const OptionLabel = styled.div`padding: 3px; " +
+                "\${(props) => css`margin-bottom: 0.3em;`}\${(props) => css`margin-top: 0.3em;`}\${props => 'display'}: none;`;",
+                "div {padding: 3px; EXTERNAL_FRAGMENT_2: none;}",
+                "div {margin-bottom: 0.3em;}",
+                "div {margin-top: 0.3em;}"
+        )
+    }
+
+    fun testArgumentNestedPlainStringCss() {
+        doTest("const ErrorDiv = styled.div`\n" +
+                "  \${props =>\n" +
+                "    `\n" +
+                "      color: red;    \n" +
+                "    `};\n" +
+                "  color: blue; \n" +
+                "`;", "div {\n" +
+                "  EXTERNAL_FRAGMENT_0;\n" +
+                "  color: blue; \n" +
+                "}"
+        )
+    }
+
+    fun testArgumentsInlinedToInjection() {
+        doTest("styled.div`\${false}: absolute;\${reference}: none;`",
+                "div {false: absolute;reference: none;}"
+        )
     }
 
     private fun setCustomInjectionsConfiguration(vararg prefixes: String) {
@@ -221,7 +340,7 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
     }
 
     private fun collectInjectedPsiFiles(file: PsiFile): List<PsiElement> {
-        val result = ContainerUtil.newLinkedHashSet<PsiFile>()
+        val result = LinkedHashSet<PsiFile>()
         PsiTreeUtil.processElements(file) {
             val host = it as? PsiLanguageInjectionHost
             if (host != null) {
@@ -231,6 +350,6 @@ class InjectionTest : LightPlatformCodeInsightFixtureTestCase() {
             true
         }
 
-        return ContainerUtil.newArrayList<PsiElement>(result)
+        return ArrayList(result)
     }
 }

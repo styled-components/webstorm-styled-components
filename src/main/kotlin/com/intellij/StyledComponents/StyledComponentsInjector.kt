@@ -2,6 +2,7 @@ package com.intellij.styledComponents
 
 import com.intellij.lang.injection.MultiHostInjector
 import com.intellij.lang.injection.MultiHostRegistrar
+import com.intellij.lang.javascript.injections.JSFormattableInjectionUtil
 import com.intellij.lang.javascript.injections.StringInterpolationErrorFilter
 import com.intellij.lang.javascript.psi.JSExpression
 import com.intellij.lang.javascript.psi.JSLiteralExpression
@@ -30,6 +31,12 @@ class StyledComponentsInjector : MultiHostInjector {
                 PlaceInfo(taggedTemplate("keyframes"), "@keyframes foo {", "}"),
                 PlaceInfo(jsxBodyText("style", "jsx"))
         )
+
+        fun matchInjectionTarget(injectionHost: PsiLanguageInjectionHost): PlaceInfo? {
+            val customInjections = CustomInjectionsConfiguration.instance(injectionHost.project)
+            return builtinPlaces.find { (elementPattern) -> elementPattern.accepts(injectionHost) }
+                    ?: customInjections.getInjectionPlaces().find { (elementPattern) -> elementPattern.accepts(injectionHost) }
+        }
     }
 
     override fun elementsToInjectIn(): MutableList<out Class<out PsiElement>> {
@@ -39,24 +46,24 @@ class StyledComponentsInjector : MultiHostInjector {
     override fun getLanguagesToInject(registrar: MultiHostRegistrar, injectionHost: PsiElement) {
         if (injectionHost !is PsiLanguageInjectionHost)
             return
-        val customInjections = CustomInjectionsConfiguration.instance(injectionHost.project)
-        val acceptedPattern = builtinPlaces.find { (elementPattern) -> elementPattern.accepts(injectionHost) }
-                ?: customInjections.getInjectionPlaces().find { (elementPattern) -> elementPattern.accepts(injectionHost) }
-        if (acceptedPattern != null) {
-            val stringPlaces = getInjectionPlaces(injectionHost)
-            if (stringPlaces.isEmpty())
-                return
-            registrar.startInjecting(LESSLanguage.INSTANCE)
-            stringPlaces.forEachIndexed { index, (prefix, range, suffix) ->
-                val thePrefix = if (index == 0) acceptedPattern.prefix + prefix.orEmpty() else prefix
-                val theSuffix = if (index == stringPlaces.size - 1) suffix.orEmpty() + acceptedPattern.suffix else suffix
-                registrar.addPlace(thePrefix, theSuffix, injectionHost, range)
-            }
-            registrar.doneInjecting()
 
-            if (stringPlaces.size > 1)
-                StringInterpolationErrorFilter.register(injectionHost, LESSLanguage.INSTANCE)
+        val acceptedPattern = matchInjectionTarget(injectionHost) ?: return
+        val stringPlaces = getInjectionPlaces(injectionHost)
+        if (stringPlaces.isEmpty())
+            return
+
+        registrar.startInjecting(LESSLanguage.INSTANCE)
+        stringPlaces.forEachIndexed { index, (prefix, range, suffix) ->
+            val thePrefix = if (index == 0) acceptedPattern.prefix + prefix.orEmpty() else prefix
+            val theSuffix = if (index == stringPlaces.size - 1) suffix.orEmpty() + acceptedPattern.suffix else suffix
+            registrar.addPlace(thePrefix, theSuffix, injectionHost, range)
         }
+        registrar.doneInjecting()
+
+        if (stringPlaces.size > 1)
+            StringInterpolationErrorFilter.register(injectionHost, LESSLanguage.INSTANCE)
+
+        JSFormattableInjectionUtil.setReformattableInjection(injectionHost, LESSLanguage.INSTANCE)
     }
 
 }
