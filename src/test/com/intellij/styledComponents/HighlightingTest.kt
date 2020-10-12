@@ -1,3 +1,5 @@
+package com.intellij.styledComponents
+
 import com.intellij.psi.css.inspections.invalid.CssInvalidPropertyValueInspection
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
 

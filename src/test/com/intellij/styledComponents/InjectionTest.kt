@@ -1,3 +1,5 @@
+package com.intellij.styledComponents
+
 import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.util.Disposer
@@ -5,7 +7,6 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.styledComponents.CustomInjectionsConfiguration
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.containers.ContainerUtil
 import org.junit.Assert
