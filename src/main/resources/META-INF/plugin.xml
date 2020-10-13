@@ -1,15 +1,11 @@
 <idea-plugin>
     <id>com.deadlock.scsyntax</id>
     <name>Styled Components &amp; Styled JSX</name>
-    <version>1.1</version>
-    <vendor email="hossam.saraya@gmail.com" url="http://www.saraya.io">Kodehouse</vendor>
-
+    <vendor>JetBrains</vendor>
     <!-- Enable plugin for all products -->
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.css</depends>
-    <!-- This enables the PSI capability for JavaScript -->
     <depends>JavaScript</depends>
-    <depends>org.jetbrains.plugins.less</depends>
     <description><![CDATA[
       <p>Adds support for <a href="https://www.styled-components.com/">styled-components</a> and <a href="https://github.com/zeit/styled-jsx">styled-jsx</a>.
       <ul>
@@ -17,16 +13,7 @@
         <li>Various quick fixes and intentions for CSS when you press Alt-Enter.
         <li>Completion suggestions for JavaScript variables, methods, and functions and navigation to their definitions with Cmd/Ctrl-click.
     ]]></description>
-    <change-notes>
-        <![CDATA[
-        <p>1.1:</p>
-        <ul>
-            <li>Added support for <a href="https://github.com/zeit/styled-jsx">styled-jsx.</a></li>
-        </ul>
-        ]]>
-    </change-notes>
-
-    <idea-version since-build="192"/>
+    
 
     <extensions defaultExtensionNs="com.intellij">
         <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
@@ -34,7 +21,7 @@
         <projectConfigurable parentId="Settings.JavaScript"
                              instance="com.intellij.styledComponents.StyledComponentsConfigurable"
                              id="styled-components"
-                             displayName="styled-components"/>
+                             displayName="Styled Components"/>
         <xml.attributeDescriptorsProvider implementation="com.intellij.styledComponents.CssPropAttributeDescriptorProvider"/>
     </extensions>
 </idea-plugin>

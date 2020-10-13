@@ -1,5 +1,7 @@
 package com.intellij.styledComponents
 
+import com.intellij.lang.Language
+import com.intellij.lang.css.CSSLanguage
 import com.intellij.lang.injection.MultiHostInjector
 import com.intellij.lang.injection.MultiHostRegistrar
 import com.intellij.lang.javascript.injections.JSFormattableInjectionUtil
@@ -10,7 +12,6 @@ import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.xml.XmlAttributeValue
-import org.jetbrains.plugins.less.LESSLanguage
 
 const val COMPONENT_PROPS_PREFIX = "div {"
 const val COMPONENT_PROPS_SUFFIX = "}"
@@ -44,15 +45,16 @@ class StyledComponentsInjector : MultiHostInjector {
     }
 
     override fun getLanguagesToInject(registrar: MultiHostRegistrar, injectionHost: PsiElement) {
-        if (injectionHost !is PsiLanguageInjectionHost)
-            return
-
+        if (injectionHost !is PsiLanguageInjectionHost) return
+        
+        val injectionLanguage = Language.findLanguageByID("LESS") ?: CSSLanguage.INSTANCE
         val acceptedPattern = matchInjectionTarget(injectionHost) ?: return
         val stringPlaces = getInjectionPlaces(injectionHost)
         if (stringPlaces.isEmpty())
             return
 
-        registrar.startInjecting(LESSLanguage.INSTANCE)
+        
+        registrar.startInjecting(injectionLanguage)
         stringPlaces.forEachIndexed { index, (prefix, range, suffix) ->
             val thePrefix = if (index == 0) acceptedPattern.prefix + prefix.orEmpty() else prefix
             val theSuffix = if (index == stringPlaces.size - 1) suffix.orEmpty() + acceptedPattern.suffix else suffix
@@ -61,9 +63,9 @@ class StyledComponentsInjector : MultiHostInjector {
         registrar.doneInjecting()
 
         if (stringPlaces.size > 1)
-            StringInterpolationErrorFilter.register(injectionHost, LESSLanguage.INSTANCE)
+            StringInterpolationErrorFilter.register(injectionHost, injectionLanguage)
 
-        JSFormattableInjectionUtil.setReformattableInjection(injectionHost, LESSLanguage.INSTANCE)
+        JSFormattableInjectionUtil.setReformattableInjection(injectionHost, injectionLanguage)
     }
 
 }
