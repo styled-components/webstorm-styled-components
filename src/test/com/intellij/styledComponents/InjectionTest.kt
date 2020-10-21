@@ -142,7 +142,7 @@ class InjectionTest : BasePlatformTestCase() {
                 "  \${media.desktop `padding: 0 20px;` }\n" +
                 "`", "div {\n" +
                 "  color: #333;\n" +
-                "  \n" +
+                "  EXTERNAL_FRAGMENT_0\n" +
                 "}", "div {padding: 0 20px;}")
     }
 
@@ -158,7 +158,7 @@ class InjectionTest : BasePlatformTestCase() {
                 "  \${bp(media.tablet)`padding: 0 20px;` }\n" +
                 "`", "div {\n" +
                 "  color: #333;\n" +
-                "  \n" +
+                "  EXTERNAL_FRAGMENT_0\n" +
                 "}", "div {padding: 0 20px;}")
     }
 
@@ -205,9 +205,9 @@ class InjectionTest : BasePlatformTestCase() {
                 "    css`\n" +
                 "      color: red;    \n" +
                 "    `}\n" +
-                "  color: blue; \n" +
+                "  color<error descr=\"Term expected\">:</error> blue; \n" +
                 "`;", "div {\n" +
-                "  \n" +
+                "  EXTERNAL_FRAGMENT_0\n" +
                 "  color: blue; \n" +
                 "}", "div {\n" +
                 "      color: red;    \n" +
@@ -224,7 +224,7 @@ class InjectionTest : BasePlatformTestCase() {
                 "    `}\n" +
                 "`;", "div {\n" +
                 "  color: blue;\n" +
-                "  \n" +
+                "  EXTERNAL_FRAGMENT_0\n" +
                 "}", "div {\n" +
                 "      color: red;\n" +
                 "    }"
@@ -237,7 +237,7 @@ class InjectionTest : BasePlatformTestCase() {
                 "    margin-bottom: 0.3em;\n" +
                 "  `}\n" +
                 "`;", "div {\n" +
-                "  \n" +
+                "  EXTERNAL_FRAGMENT_0\n" +
                 "}", "div {\n" +
                 "    margin-bottom: 0.3em;\n" +
                 "  }"
@@ -246,29 +246,29 @@ class InjectionTest : BasePlatformTestCase() {
 
     fun testArgumentNestedInjectionLeadingArgument() {
         doTest("const OptionLabel = styled.div`\${(props) => css`margin-bottom: 0.3em;`} `;",
-                "div { }",
+                "div {EXTERNAL_FRAGMENT_0 }",
                 "div {margin-bottom: 0.3em;}"
         )
     }
 
     fun testArgumentNestedInjectionTrailingArgument() {
         doTest("const OptionLabel = styled.div` \${(props) => css`margin-bottom: 0.3em;`}`;",
-                "div { }",
+                "div { EXTERNAL_FRAGMENT_0}",
                 "div {margin-bottom: 0.3em;}"
         )
     }
 
     fun testArgumentNestedInjectionLeadingAndTrailingArgument() {
-        doTest("const OptionLabel = styled.div`\${(props) => css`margin-bottom: 0.3em;`} padding: \${(props) => `5px;`}`;",
-                "div { padding: EXTERNAL_FRAGMENT_1}",
+        doTest("const OptionLabel = styled.div`\${(props) => css`margin-bottom: 0.3em;`} padding<error descr=\"Term expected\">:</error> \${(props) => `5px;`}`;",
+                "div {EXTERNAL_FRAGMENT_0 padding: EXTERNAL_FRAGMENT_1}",
                 "div {margin-bottom: 0.3em;}"
         )
     }
 
     fun testArgumentNestedInjectionAdjacentArguments() {
         doTest("const OptionLabel = styled.div`padding: 3px; " +
-                "\${(props) => css`margin-bottom: 0.3em;`}\${'IGNORED'}\${props => 'display'}: none;`;",
-                "div {padding: 3px; EXTERNAL_FRAGMENT_2: none;}",
+                "\${(props) => css`margin-bottom: 0.3em;`}\${'BETWEEN-'}\${props => 'display'}: none;`;",
+                "div {padding: 3px; EXTERNAL_FRAGMENT_0BETWEEN-EXTERNAL_FRAGMENT_2: none;}",
                 "div {margin-bottom: 0.3em;}"
         )
     }
@@ -276,15 +276,15 @@ class InjectionTest : BasePlatformTestCase() {
     fun testArgumentNestedInjectionAdjacentArgumentsLeading() {
         doTest("const OptionLabel = styled.div`" +
                 "\${(props) => css`margin-bottom: 0.3em;`}\${'margin'}: 20px;\${props => 'display'}: none;`;",
-                "div {margin: 20px;EXTERNAL_FRAGMENT_2: none;}",
+                "div {EXTERNAL_FRAGMENT_0margin: 20px;EXTERNAL_FRAGMENT_2: none;}",
                 "div {margin-bottom: 0.3em;}"
         )
     }
 
     fun testArgumentNestedInjectionAdjacentArgumentsTrailing() {
         doTest("const OptionLabel = styled.div`padding: 3px; " +
-                "\${(props) => css`margin-bottom: 0.3em;`}\${'IGNORED'}\${props => 'display'}: none; \${'background: red'}`;",
-                "div {padding: 3px; EXTERNAL_FRAGMENT_2: none; background: red}",
+                "\${(props) => css`margin-bottom: 0.3em;`}\${'BETWEEN-'}\${props => 'display'}: none; \${'background: red'}`;",
+                "div {padding: 3px; EXTERNAL_FRAGMENT_0BETWEEN-EXTERNAL_FRAGMENT_2: none; background: red}",
                 "div {margin-bottom: 0.3em;}"
         )
     }
@@ -292,7 +292,7 @@ class InjectionTest : BasePlatformTestCase() {
     fun testArgumentNestedInjectionAdjacentArgumentsWithInjectionInBetween() {
         doTest("const OptionLabel = styled.div`padding: 3px; " +
                 "\${(props) => css`margin-bottom: 0.3em;`}\${(props) => css`margin-top: 0.3em;`}\${props => 'display'}: none;`;",
-                "div {padding: 3px; EXTERNAL_FRAGMENT_2: none;}",
+                "div {padding: 3px; EXTERNAL_FRAGMENT_0EXTERNAL_FRAGMENT_1EXTERNAL_FRAGMENT_2: none;}",
                 "div {margin-bottom: 0.3em;}",
                 "div {margin-top: 0.3em;}"
         )

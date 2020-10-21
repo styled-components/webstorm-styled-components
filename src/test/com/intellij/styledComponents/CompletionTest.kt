@@ -5,9 +5,9 @@ import com.intellij.codeInsight.lookup.Lookup
 import com.intellij.lang.javascript.formatter.JSCodeStyleSettings
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager
 import com.intellij.testFramework.UsefulTestCase
-import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
 
-class CompletionTest : LightPlatformCodeInsightFixtureTestCase() {
+class CompletionTest : BasePlatformTestCase() {
   fun testCompletionAfterInterpolationExpressionInParentheses() {
     myFixture.configureByText("dummy.es6",
                               "const HeroImage = styled(Box)`\n" +
