@@ -1,9 +1,9 @@
 package com.intellij.styledComponents
 
 import com.intellij.psi.css.inspections.invalid.CssInvalidPropertyValueInspection
-import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
 
-class HighlightingTest : LightPlatformCodeInsightFixtureTestCase() {
+class HighlightingTest : BasePlatformTestCase() {
 
     fun testWithoutArguments_ErrorsHighlighted() {
         myFixture.enableInspections(CssInvalidPropertyValueInspection::class.java)
