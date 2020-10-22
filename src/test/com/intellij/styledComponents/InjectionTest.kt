@@ -205,7 +205,7 @@ class InjectionTest : BasePlatformTestCase() {
                 "    css`\n" +
                 "      color: red;    \n" +
                 "    `}\n" +
-                "  color<error descr=\"Term expected\">:</error> blue; \n" +
+                "  color: blue; \n" +
                 "`;", "div {\n" +
                 "  EXTERNAL_FRAGMENT_0\n" +
                 "  color: blue; \n" +
@@ -259,7 +259,7 @@ class InjectionTest : BasePlatformTestCase() {
     }
 
     fun testArgumentNestedInjectionLeadingAndTrailingArgument() {
-        doTest("const OptionLabel = styled.div`\${(props) => css`margin-bottom: 0.3em;`} padding<error descr=\"Term expected\">:</error> \${(props) => `5px;`}`;",
+        doTest("const OptionLabel = styled.div`\${(props) => css`margin-bottom: 0.3em;`} padding: \${(props) => `5px;`}`;",
                 "div {EXTERNAL_FRAGMENT_0 padding: EXTERNAL_FRAGMENT_1}",
                 "div {margin-bottom: 0.3em;}"
         )

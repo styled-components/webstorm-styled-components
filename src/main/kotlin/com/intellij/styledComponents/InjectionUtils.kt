@@ -6,11 +6,9 @@ import com.intellij.lang.javascript.psi.JSReferenceExpression
 import com.intellij.lang.javascript.psi.ecma6.JSStringTemplateExpression
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiLanguageInjectionHost
-import com.intellij.psi.PsiRecursiveElementWalkingVisitor
 import kotlin.math.max
 
-private const val EXTERNAL_FRAGMENT = "EXTERNAL_FRAGMENT"
+const val EXTERNAL_FRAGMENT = "EXTERNAL_FRAGMENT"
 
 fun getInjectionPlaces(quotedLiteral: PsiElement): List<StringPlace> {
   if (quotedLiteral is JSStringTemplateExpression) {
