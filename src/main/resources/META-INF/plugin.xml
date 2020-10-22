@@ -13,7 +13,7 @@
         <li>Various quick fixes and intentions for CSS when you press Alt-Enter.
         <li>Completion suggestions for JavaScript variables, methods, and functions and navigation to their definitions with Cmd/Ctrl-click.
     ]]></description>
-    
+
 
     <extensions defaultExtensionNs="com.intellij">
         <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
@@ -23,5 +23,6 @@
                              id="styled-components"
                              displayName="Styled Components"/>
         <xml.attributeDescriptorsProvider implementation="com.intellij.styledComponents.CssPropAttributeDescriptorProvider"/>
+        <highlightErrorFilter implementation="com.intellij.styledComponents.StyledComponentsErrorFilter"/>
     </extensions>
 </idea-plugin>

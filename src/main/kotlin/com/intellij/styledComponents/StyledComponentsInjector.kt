@@ -53,7 +53,6 @@ class StyledComponentsInjector : MultiHostInjector {
         if (stringPlaces.isEmpty())
             return
 
-        
         registrar.startInjecting(injectionLanguage)
         stringPlaces.forEachIndexed { index, (prefix, range, suffix) ->
             val thePrefix = if (index == 0) acceptedPattern.prefix + prefix.orEmpty() else prefix
@@ -62,8 +61,10 @@ class StyledComponentsInjector : MultiHostInjector {
         }
         registrar.doneInjecting()
 
-        if (stringPlaces.size > 1)
+        if (stringPlaces.size > 1) {
             StringInterpolationErrorFilter.register(injectionHost, injectionLanguage)
+            StyledComponentsErrorFilter.register(injectionHost, injectionLanguage)
+        }
 
         JSFormattableInjectionUtil.setReformattableInjection(injectionHost, injectionLanguage)
     }
