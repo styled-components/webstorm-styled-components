@@ -22,7 +22,7 @@ class StyledComponentsErrorFilter : HighlightErrorFilter() {
   }
 
   override fun shouldHighlightErrorElement(element: PsiErrorElement): Boolean {
-    if (!STYLED_COMPONENTS_INJECTION[element.containingFile]) return true
+    if (!STYLED_COMPONENTS_INJECTION.get(element.containingFile, false)) return true
     if (PsiUtilCore.getElementType(PsiTreeUtil.skipWhitespacesAndCommentsForward(element)) != CssElementTypes.CSS_COLON) return true
 
     val prevElement = PsiTreeUtil.skipWhitespacesAndCommentsBackward(element)?.takeIf { it is CssTerm } ?: return true
