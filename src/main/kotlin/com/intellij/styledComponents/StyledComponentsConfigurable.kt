@@ -87,7 +87,7 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
     }
 
     override fun getDisplayName(): String {
-        return "styled-components"
+        return StyledComponentsBundle.message("styled.components.configurable.title")
     }
 
     override fun apply() {
@@ -99,9 +99,10 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
         tagsModel.setTags(myConfiguration.getTagPrefixes())
     }
 
-    override fun createComponent(): JComponent? {
+    override fun createComponent(): JComponent {
         val table = ToolbarDecorator.createDecorator(myTagPrefixesField.table).disableUpDownActions().createPanel()
-        val component = LabeledComponent.create(table, "Additional template tag prefixes:")
+        val component = LabeledComponent.create(
+          table, StyledComponentsBundle.message("styled.components.configurable.label.tag.prefixes"))
 
         val panel = JPanel(BorderLayout())
         panel.add(component, BorderLayout.NORTH)
@@ -113,7 +114,7 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
     }
 
     private class TagsModel : AbstractTableModel(), ItemRemovable, EditableModel {
-        internal var myTags: MutableList<String> = ArrayList()
+        var myTags: MutableList<String> = ArrayList()
 
         override fun getRowCount(): Int {
             return myTags.size
