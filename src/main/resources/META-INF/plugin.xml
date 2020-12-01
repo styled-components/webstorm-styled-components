@@ -1,28 +1,29 @@
 <idea-plugin>
-    <id>com.deadlock.scsyntax</id>
-    <name>Styled Components &amp; Styled JSX</name>
-    <vendor>JetBrains</vendor>
-    <!-- Enable plugin for all products -->
-    <depends>com.intellij.modules.lang</depends>
-    <depends>com.intellij.css</depends>
-    <depends>JavaScript</depends>
-    <description><![CDATA[
+  <id>com.deadlock.scsyntax</id>
+  <name>Styled Components &amp; Styled JSX</name>
+  <vendor>JetBrains</vendor>
+  <!-- Enable plugin for all products -->
+  <depends>com.intellij.modules.lang</depends>
+  <depends>com.intellij.css</depends>
+  <depends>JavaScript</depends>
+  <description><![CDATA[
       <p>Adds support for <a href="https://www.styled-components.com/">styled-components</a> and <a href="https://github.com/zeit/styled-jsx">styled-jsx</a>.
       <ul>
         <li>Code completion for CSS properties and values inside template literals.
         <li>Various quick fixes and intentions for CSS when you press Alt-Enter.
         <li>Completion suggestions for JavaScript variables, methods, and functions and navigation to their definitions with Cmd/Ctrl-click.
     ]]></description>
+  <resource-bundle>messages.StyledComponentsBundle</resource-bundle>
 
-
-    <extensions defaultExtensionNs="com.intellij">
-        <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
-        <projectService serviceImplementation="com.intellij.styledComponents.CustomInjectionsConfiguration"/>
-        <projectConfigurable parentId="Settings.JavaScript"
-                             instance="com.intellij.styledComponents.StyledComponentsConfigurable"
-                             id="styled-components"
-                             displayName="Styled Components"/>
-        <xml.attributeDescriptorsProvider implementation="com.intellij.styledComponents.CssPropAttributeDescriptorProvider"/>
-        <highlightErrorFilter implementation="com.intellij.styledComponents.StyledComponentsErrorFilter"/>
-    </extensions>
+  <extensions defaultExtensionNs="com.intellij">
+    <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
+    <projectService serviceImplementation="com.intellij.styledComponents.CustomInjectionsConfiguration"/>
+    <projectConfigurable id="styled-components"
+                         parentId="Settings.JavaScript"
+                         instance="com.intellij.styledComponents.StyledComponentsConfigurable"
+                         bundle="messages.StyledComponentsBundle"
+                         key="styled.components.configurable.title"/>
+    <xml.attributeDescriptorsProvider implementation="com.intellij.styledComponents.CssPropAttributeDescriptorProvider"/>
+    <highlightErrorFilter implementation="com.intellij.styledComponents.StyledComponentsErrorFilter"/>
+  </extensions>
 </idea-plugin>
