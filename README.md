@@ -1,4 +1,7 @@
 # webstorm-styled-components
+
+![Discord](https://img.shields.io/discord/818449605409767454?logo=discord)
+
 Support for styled-components 💅 in WebStorm
 
 The plugin can be installed in WebStorm, IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine v2017.2 and above.
