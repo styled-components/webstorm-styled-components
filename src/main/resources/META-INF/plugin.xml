@@ -26,5 +26,6 @@
                          key="styled.components.configurable.title"/>
     <xml.attributeDescriptorsProvider implementation="com.intellij.styledComponents.CssPropAttributeDescriptorProvider"/>
     <highlightErrorFilter implementation="com.intellij.styledComponents.StyledComponentsErrorFilter"/>
+    <psi.referenceContributor language="JavaScript" implementation="com.intellij.styledComponents.StyledComponentsReferenceContributor"/>
   </extensions>
 </idea-plugin>
