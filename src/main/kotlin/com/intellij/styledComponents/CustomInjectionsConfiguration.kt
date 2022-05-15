@@ -45,7 +45,7 @@ class CustomInjectionsConfiguration : PersistentStateComponent<CustomInjectionsC
         updatePatterns(newState)
     }
 
-    class InjectionsState(@Suppress("unused") var prefixes: Array<String>? = null)
+    class InjectionsState(var prefixes: Array<String>? = null)
 
     companion object {
         fun instance(project: Project): CustomInjectionsConfiguration = project.getService(CustomInjectionsConfiguration::class.java)
