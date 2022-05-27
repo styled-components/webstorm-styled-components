@@ -130,7 +130,7 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
       return 1
     }
 
-    override fun getValueAt(row: Int, column: Int): Any? = myTags[row]
+    override fun getValueAt(row: Int, column: Int): Any = myTags[row]
 
     override fun setValueAt(o: Any?, row: Int, column: Int) {
       myTags[row] = o as String
