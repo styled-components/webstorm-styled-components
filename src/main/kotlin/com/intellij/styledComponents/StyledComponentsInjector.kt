@@ -17,7 +17,7 @@ const val COMPONENT_PROPS_PREFIX = "div {"
 const val COMPONENT_PROPS_SUFFIX = "}"
 
 class StyledComponentsInjector : MultiHostInjector {
-    companion object {
+    private object Holder {
         private val styledPattern = withNameStartingWith(listOf("styled"))
         private val builtinPlaces: List<PlaceInfo> = listOf(
                 PlaceInfo(taggedTemplate(PlatformPatterns.or(styledPattern,
@@ -48,7 +48,7 @@ class StyledComponentsInjector : MultiHostInjector {
         if (injectionHost !is PsiLanguageInjectionHost) return
         
         val injectionLanguage = Language.findLanguageByID("LESS") ?: CSSLanguage.INSTANCE
-        val acceptedPattern = matchInjectionTarget(injectionHost) ?: return
+        val acceptedPattern = Holder.matchInjectionTarget(injectionHost) ?: return
         val stringPlaces = getInjectionPlaces(injectionHost)
         if (stringPlaces.isEmpty())
             return
