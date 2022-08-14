@@ -3,7 +3,7 @@ package com.intellij.styledComponents
 import com.intellij.javascript.nodejs.util.NodePackage
 import com.intellij.javascript.nodejs.util.NodePackageDescriptor
 import com.intellij.lang.javascript.DialectDetector
-import com.intellij.lang.javascript.frameworks.react.ReactAttributeDescriptorImpl
+import com.intellij.lang.javascript.frameworks.jsx.JSXAttributeDescriptorImpl
 import com.intellij.lang.javascript.psi.ecma6.impl.JSLocalImplicitElementImpl
 import com.intellij.lang.javascript.psi.types.JSNamedTypeFactory
 import com.intellij.lang.javascript.psi.types.JSTypeContext
@@ -40,7 +40,7 @@ class CssPropAttributeDescriptorProvider : XmlAttributeDescriptorsProvider {
 
     private fun createCssPropertyDescriptor(tag: XmlTag): XmlAttributeDescriptor {
         val implicit = JSLocalImplicitElementImpl("css", JS_STRING_TYPE, tag, null)
-        return ReactAttributeDescriptorImpl.create("css", implicit, JS_STRING_TYPE, true)
+        return JSXAttributeDescriptorImpl.create("css", implicit, JS_STRING_TYPE, true)
     }
 
     private fun isCssPropSupported(tag: XmlTag): Boolean {
