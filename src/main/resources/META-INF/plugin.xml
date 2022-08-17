@@ -17,6 +17,7 @@
   <resource-bundle>messages.StyledComponentsBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
+    <dependencySupport kind="javascript" coordinate="npm:styled-components" displayName="Styled Components"/>
     <multiHostInjector implementation="com.intellij.styledComponents.StyledComponentsInjector"/>
     <projectService serviceImplementation="com.intellij.styledComponents.CustomInjectionsConfiguration"/>
     <projectConfigurable id="styled-components"
