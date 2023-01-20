@@ -5,13 +5,14 @@ import com.intellij.lang.javascript.JavascriptLanguage
 import com.intellij.lang.javascript.refactoring.JSNamesValidation
 import com.intellij.openapi.editor.event.DocumentEvent
 import com.intellij.openapi.editor.event.DocumentListener
-import com.intellij.openapi.fileTypes.PlainTextFileType
+import com.intellij.openapi.fileTypes.PlainTextLanguage
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.ComponentValidator
 import com.intellij.openapi.ui.LabeledComponent
 import com.intellij.openapi.ui.ValidationInfo
 import com.intellij.openapi.util.Disposer
+import com.intellij.openapi.util.NlsContexts
 import com.intellij.ui.EditorTextField
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.table.JBTable
@@ -30,11 +31,10 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
   private val disposable = Disposer.newDisposable()
 
   private fun createPrefixesField() = object : JBListTable(JBTable(tagsModel), disposable) {
-    override fun getRowRenderer(p0: Int): JBTableRowRenderer = object : EditorTextFieldJBTableRowRenderer(project,
-                                                                                                          PlainTextFileType.INSTANCE,
-                                                                                                          disposable) {
-      override fun getText(p0: JTable?, index: Int): String = tagsModel.myTags[index]
-    }
+    override fun getRowRenderer(p0: Int): JBTableRowRenderer =
+      object : EditorTextFieldJBTableRowRenderer(project, PlainTextLanguage.INSTANCE, disposable) {
+        override fun getText(p0: JTable?, index: Int): String = tagsModel.myTags[index]
+      }
 
     override fun getRowEditor(p0: Int): JBTableRowEditor = object : JBTableRowEditor() {
       override fun getValue(): JBTableRow = JBTableRow { (getComponent(0) as EditorTextField).text }
@@ -55,21 +55,22 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
       override fun getFocusableComponents(): Array<JComponent> = arrayOf(preferredFocusedComponent)
       override fun getPreferredFocusedComponent(): JComponent = getComponent(0) as JComponent
 
-      fun getErrorText(value: String?): String? {
+      fun getErrorText(value: String?): @NlsContexts.DialogMessage String? {
         val trimmed = value?.trim() ?: ""
         val names = trimmed.split(".")
         if (trimmed.isBlank() || names.isEmpty()) {
-          return "Value is empty"
+          return StyledComponentsBundle.message("styled.components.configurable.error.value.is.empty")
         }
         return names.foldIndexed<String, String?>(null) { index, previous, string ->
           if (previous != null) {
+            @Suppress("HardCodedStringLiteral")
             previous
           }
           else if (index == 0 && !LanguageNamesValidation.INSTANCE.forLanguage(JavascriptLanguage.INSTANCE).isIdentifier(string, project)) {
-            "'$string' is not a valid JavaScript identifier"
+            StyledComponentsBundle.message("styled.components.configurable.not.valid.identifier", string)
           }
           else if (!JSNamesValidation.isIdentifierName(string)) {
-            "'$string' is not a valid property name"
+            StyledComponentsBundle.message("styled.components.configurable.not.valid.property.name", string)
           }
           else {
             null
