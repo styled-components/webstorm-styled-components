@@ -83,7 +83,7 @@ fun jsxAttribute(name: String): ElementPattern<out PsiElement> {
                 override fun accepts(literal: JSLiteralExpression, context: ProcessingContext?): Boolean {
                     return literal.isStringLiteral || literal is JSStringTemplateExpression
                 }
-            }).withAncestor(2, PlatformPatterns.psiElement<JSEmbeddedContent>(JSEmbeddedContent::class.java)
+            }).withAncestor(2, PlatformPatterns.psiElement(JSEmbeddedContent::class.java)
                     .withParent(cssAttributePattern))
 
 
