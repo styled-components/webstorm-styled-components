@@ -1,8 +1,8 @@
 <idea-plugin>
   <id>com.deadlock.scsyntax</id>
   <name>Styled Components &amp; Styled JSX</name>
+  <category>JavaScript Frameworks and Tools</category>
   <vendor>JetBrains</vendor>
-  <!-- Enable plugin for all products -->
   <depends>com.intellij.modules.lang</depends>
   <depends>com.intellij.css</depends>
   <depends>JavaScript</depends>
