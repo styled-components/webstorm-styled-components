@@ -19,7 +19,7 @@
     <orderEntry type="module" module-name="intellij.xml.impl" />
     <orderEntry type="module" module-name="intellij.css" />
     <orderEntry type="module" module-name="intellij.css.impl" />
-    <orderEntry type="module" module-name="intellij.less" />
+    <orderEntry type="module" module-name="intellij.postcss" />
     <orderEntry type="module" module-name="intellij.javascript.impl" />
     <orderEntry type="module" module-name="intellij.platform.testFramework" scope="TEST" />
   </component>

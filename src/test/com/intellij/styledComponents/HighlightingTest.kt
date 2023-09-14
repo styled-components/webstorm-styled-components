@@ -1,16 +1,25 @@
 package com.intellij.styledComponents
 
+import com.intellij.psi.css.inspections.CssUnknownPropertyInspection
 import com.intellij.psi.css.inspections.invalid.CssInvalidPropertyValueInspection
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 
 class HighlightingTest : BasePlatformTestCase() {
 
-    fun testWithoutArguments_ErrorsHighlighted() {
-        myFixture.enableInspections(CssInvalidPropertyValueInspection::class.java)
-        doTest("var someCss = css`div {\n" +
-                "  color:<error>not-a-color</error>\n" +
-                "}`")
-    }
+  fun testWithoutArguments_ErrorsHighlighted() {
+    myFixture.enableInspections(CssInvalidPropertyValueInspection::class.java, CssUnknownPropertyInspection::class.java)
+    doTest("""
+      var someCss = css`div {
+        color: <error>not-a-color</error>;
+        .nested {
+          <warning>unknown</warning>: 0;
+        }
+        @container sidebar (width < calc(64px + 12ch)) {
+          display: none;
+        }
+      }`
+  """.trimIndent())
+  }
 
     fun testErrorSurroundsInterpolationArgument_NotHighlighted() {
         myFixture.enableInspections(CssInvalidPropertyValueInspection::class.java)

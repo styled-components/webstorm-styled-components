@@ -1,7 +1,5 @@
 package com.intellij.styledComponents
 
-import com.intellij.lang.Language
-import com.intellij.lang.css.CSSLanguage
 import com.intellij.lang.injection.MultiHostInjector
 import com.intellij.lang.injection.MultiHostRegistrar
 import com.intellij.lang.javascript.injections.JSFormattableInjectionUtil
@@ -12,6 +10,7 @@ import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.xml.XmlAttributeValue
+import org.intellij.plugins.postcss.PostCssLanguage
 
 const val COMPONENT_PROPS_PREFIX = "div {"
 const val COMPONENT_PROPS_SUFFIX = "}"
@@ -46,8 +45,8 @@ class StyledComponentsInjector : MultiHostInjector {
 
     override fun getLanguagesToInject(registrar: MultiHostRegistrar, injectionHost: PsiElement) {
         if (injectionHost !is PsiLanguageInjectionHost) return
-        
-        val injectionLanguage = Language.findLanguageByID("LESS") ?: CSSLanguage.INSTANCE
+
+        val injectionLanguage = PostCssLanguage.INSTANCE
         val acceptedPattern = Holder.matchInjectionTarget(injectionHost) ?: return
         val stringPlaces = getInjectionPlaces(injectionHost)
         if (stringPlaces.isEmpty())

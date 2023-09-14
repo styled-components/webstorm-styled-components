@@ -27,7 +27,7 @@ intellij {
 //    version 'IU-LATEST-EAP-SNAPSHOT'
 
     // plugins to be used as build dependencies
-    plugins = ['JavaScriptLanguage', 'CSS', 'less']
+    plugins = ['JavaScriptLanguage', 'CSS', 'PostCSS']
     //name is used for zip archive when building plugin
     pluginName 'webstorm-styled-components'
     downloadSources false

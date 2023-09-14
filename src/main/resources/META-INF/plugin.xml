@@ -6,7 +6,7 @@
   <depends>com.intellij.modules.lang</depends>
   <depends>com.intellij.css</depends>
   <depends>JavaScript</depends>
-  <depends>org.jetbrains.plugins.less</depends>
+  <depends>org.intellij.plugins.postcss</depends>
   <description><![CDATA[
       <p>Adds support for <a href="https://www.styled-components.com/">styled-components</a> and <a href="https://github.com/zeit/styled-jsx">styled-jsx</a>.
       <ul>
