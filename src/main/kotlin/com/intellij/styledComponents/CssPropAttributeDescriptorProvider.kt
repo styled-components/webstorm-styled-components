@@ -6,7 +6,6 @@ import com.intellij.lang.javascript.DialectDetector
 import com.intellij.lang.javascript.frameworks.jsx.JSXAttributeDescriptorImpl
 import com.intellij.lang.javascript.psi.ecma6.impl.JSLocalImplicitElementImpl
 import com.intellij.lang.javascript.psi.types.JSNamedTypeFactory
-import com.intellij.lang.javascript.psi.types.JSTypeContext
 import com.intellij.lang.javascript.psi.types.JSTypeSource
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
@@ -21,7 +20,7 @@ import com.intellij.xml.XmlAttributeDescriptorsProvider
 
 private const val STYLED_COMPONENTS_PACKAGE_NAME = "styled-components"
 
-private val JS_STRING_TYPE = JSNamedTypeFactory.createType("string", JSTypeSource.EMPTY, JSTypeContext.INSTANCE)
+private val JS_STRING_TYPE = JSNamedTypeFactory.createStringPrimitiveType(JSTypeSource.EMPTY)
 
 class CssPropAttributeDescriptorProvider : XmlAttributeDescriptorsProvider {
     override fun getAttributeDescriptors(tag: XmlTag?): Array<XmlAttributeDescriptor> {
