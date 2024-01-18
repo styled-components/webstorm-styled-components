@@ -2,10 +2,12 @@ package com.intellij.styledComponents
 
 import com.intellij.lang.javascript.psi.JSExpression
 import com.intellij.openapi.components.PersistentStateComponent
+import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.State
 import com.intellij.openapi.project.Project
 import com.intellij.patterns.PlatformPatterns
 
+@Service(Service.Level.PROJECT)
 @State(name = "StyledComponentsInjections")
 class CustomInjectionsConfiguration : PersistentStateComponent<CustomInjectionsConfiguration.InjectionsState> {
     private var myState: InjectionsState? = null
