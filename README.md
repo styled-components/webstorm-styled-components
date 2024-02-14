@@ -81,7 +81,7 @@ The project structure and dependencies are defined in [build.gradle](https://git
 
 **Useful links**
 * [gradle-intellij-plugin](https://github.com/JetBrains/gradle-intellij-plugin) documentation on available Gradle tasks and build.gradle configuration options
-* [IDEA SDK documentation](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started.html) describes IDEA plugin structure in general
+* [IntelliJ Platform SDK documentation](https://plugins.jetbrains.com/docs/intellij) describes IDE plugin structure in general
 * [Kotlin language reference](https://kotlinlang.org/docs/reference/) 
 
 # License (MIT)
