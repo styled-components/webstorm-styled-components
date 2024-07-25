@@ -1,0 +1,3 @@
+- name: lib/styled-components.jar
+  modules:
+  - name: intellij.styled.components
