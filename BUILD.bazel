@@ -1,0 +1,59 @@
+### auto-generated section `build intellij.styled.components` start
+load("@rules_jvm//:jvm.bzl", "jvm_resources")
+load("@rules_jvm//:rules.bzl", "jvm_library")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_test")
+
+jvm_resources(
+  name = "styled-components_resources",
+  files = glob(["src/main/resources/**/*"]),
+  strip_prefix = "src/main/resources"
+)
+
+jvm_library(
+  name = "styled-components",
+  module_name = "intellij.styled.components",
+  visibility = ["//visibility:public"],
+  srcs = glob(["src/main/kotlin/**/*.kt", "src/main/kotlin/**/*.java"], allow_empty = True, exclude = ["**/module-info.java"]),
+  javac_opts = "@rules_jvm//:j17",
+  kotlinc_opts = "@rules_jvm//:k17",
+  deps = [
+    "@community//platform/util",
+    "@community//platform/platform-api:ide",
+    "@community//platform/platform-impl:ide-impl",
+    "@community//platform/lang-impl",
+    "@community//platform/core-api:core",
+    "@community//platform/core-ui",
+    "@community//xml/impl",
+    "//CSS/css-api:css",
+    "//CSS/impl:css-impl",
+    "//contrib/postcss",
+    "//plugins/JavaScriptLanguage:javascript-impl",
+  ],
+  runtime_deps = [":styled-components_resources"]
+)
+
+kt_jvm_test(
+  name = "styled-components_test",
+  visibility = ["//visibility:public"],
+  srcs = glob(["src/test/**/*.kt", "src/test/**/*.java"], allow_empty = True, exclude = ["**/module-info.java"]),
+  javac_opts = "@rules_jvm//:j17",
+  kotlinc_opts = "@rules_jvm//:k17",
+  associates = [":styled-components"],
+  deps = [
+    "@community//platform/util",
+    "@community//platform/platform-api:ide",
+    "@community//platform/platform-impl:ide-impl",
+    "@community//platform/lang-impl",
+    "@community//platform/core-api:core",
+    "@community//platform/core-ui",
+    "@community//xml/impl",
+    "//CSS/css-api:css",
+    "//CSS/impl:css-impl",
+    "//contrib/postcss",
+    "//plugins/JavaScriptLanguage:javascript-impl",
+    "@community//platform/testFramework",
+    "@community//platform/testFramework:testFramework_test",
+  ],
+  runtime_deps = [":styled-components_resources"]
+)
+### auto-generated section `build intellij.styled.components` end
