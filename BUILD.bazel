@@ -1,7 +1,5 @@
 ### auto-generated section `build intellij.styled.components` start
-load("@rules_jvm//:jvm.bzl", "jvm_resources")
-load("@rules_jvm//:rules.bzl", "jvm_library")
-load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_test")
+load("@rules_jvm//:jvm.bzl", "jvm_library", "jvm_resources", "jvm_test")
 
 jvm_resources(
   name = "styled-components_resources",
@@ -13,9 +11,7 @@ jvm_library(
   name = "styled-components",
   module_name = "intellij.styled.components",
   visibility = ["//visibility:public"],
-  srcs = glob(["src/main/kotlin/**/*.kt", "src/main/kotlin/**/*.java"], allow_empty = True, exclude = ["**/module-info.java"]),
-  javac_opts = "@rules_jvm//:j17",
-  kotlinc_opts = "@rules_jvm//:k17",
+  srcs = glob(["src/main/kotlin/**/*.kt", "src/main/kotlin/**/*.java"], allow_empty = True),
   deps = [
     "@community//platform/util",
     "@community//platform/platform-api:ide",
@@ -32,17 +28,16 @@ jvm_library(
   runtime_deps = [":styled-components_resources"]
 )
 
-kt_jvm_test(
-  name = "styled-components_test",
+jvm_library(
+  name = "styled-components_test_lib",
   visibility = ["//visibility:public"],
-  srcs = glob(["src/test/**/*.kt", "src/test/**/*.java"], allow_empty = True, exclude = ["**/module-info.java"]),
-  javac_opts = "@rules_jvm//:j17",
-  kotlinc_opts = "@rules_jvm//:k17",
+  srcs = glob(["src/test/**/*.kt", "src/test/**/*.java"], allow_empty = True),
   associates = [":styled-components"],
   deps = [
     "@community//platform/util",
     "@community//platform/platform-api:ide",
     "@community//platform/platform-impl:ide-impl",
+    "@community//platform/platform-impl:ide-impl_test_lib",
     "@community//platform/lang-impl",
     "@community//platform/core-api:core",
     "@community//platform/core-ui",
@@ -50,10 +45,16 @@ kt_jvm_test(
     "//CSS/css-api:css",
     "//CSS/impl:css-impl",
     "//contrib/postcss",
+    "//contrib/postcss:postcss_test_lib",
     "//plugins/JavaScriptLanguage:javascript-impl",
     "@community//platform/testFramework",
-    "@community//platform/testFramework:testFramework_test",
+    "@community//platform/testFramework:testFramework_test_lib",
   ],
   runtime_deps = [":styled-components_resources"]
+)
+
+jvm_test(
+  name = "styled-components_test",
+  runtime_deps = [":styled-components_test_lib"]
 )
 ### auto-generated section `build intellij.styled.components` end
