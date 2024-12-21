@@ -66,7 +66,7 @@ class StyledComponentsConfigurable(private val project: Project) : SearchableCon
             @Suppress("HardCodedStringLiteral")
             previous
           }
-          else if (index == 0 && !LanguageNamesValidation.INSTANCE.forLanguage(JavascriptLanguage.INSTANCE).isIdentifier(string, project)) {
+          else if (index == 0 && !LanguageNamesValidation.INSTANCE.forLanguage(JavascriptLanguage).isIdentifier(string, project)) {
             StyledComponentsBundle.message("styled.components.configurable.not.valid.identifier", string)
           }
           else if (!JSNamesValidation.isIdentifierName(string)) {
