@@ -19,17 +19,17 @@ import com.intellij.util.SmartList
 import com.intellij.util.containers.ContainerUtil
 import java.util.*
 
-fun taggedTemplate(name: String): ElementPattern<JSStringTemplateExpression> {
+internal fun taggedTemplate(name: String): ElementPattern<JSStringTemplateExpression> {
     return taggedTemplate(referenceExpression().withText(name))
 }
 
-fun taggedTemplate(tagPattern: ElementPattern<out JSExpression>): ElementPattern<JSStringTemplateExpression> {
+internal fun taggedTemplate(tagPattern: ElementPattern<out JSExpression>): ElementPattern<JSStringTemplateExpression> {
     return PlatformPatterns.psiElement(JSStringTemplateExpression::class.java)
             .withParent(PlatformPatterns.psiElement(ES6TaggedTemplateExpression::class.java)
                     .withChild(tagPattern))
 }
 
-fun withReferenceName(name: String): ElementPattern<JSReferenceExpression> {
+internal fun withReferenceName(name: String): ElementPattern<JSReferenceExpression> {
     return referenceExpression()
             .with(object : PatternCondition<JSReferenceExpression>("referenceName") {
                 override fun accepts(referenceExpression: JSReferenceExpression, context: ProcessingContext): Boolean {
@@ -38,10 +38,10 @@ fun withReferenceName(name: String): ElementPattern<JSReferenceExpression> {
             })
 }
 
-fun referenceExpression() = PlatformPatterns.psiElement(JSReferenceExpression::class.java)!!
-fun callExpression() = PlatformPatterns.psiElement(JSCallExpression::class.java)!!
+internal fun referenceExpression() = PlatformPatterns.psiElement(JSReferenceExpression::class.java)!!
+internal fun callExpression() = PlatformPatterns.psiElement(JSCallExpression::class.java)!!
 
-fun withNameStartingWith(names: List<String>): ElementPattern<JSReferenceExpression> {
+internal fun withNameStartingWith(names: List<String>): ElementPattern<JSReferenceExpression> {
     return referenceExpression().with(object : PatternCondition<JSReferenceExpression>("nameStartingWith") {
         override fun accepts(referenceExpression: JSReferenceExpression, context: ProcessingContext): Boolean {
             return ContainerUtil.startsWith(getReferenceParts(referenceExpression), names)
@@ -49,7 +49,7 @@ fun withNameStartingWith(names: List<String>): ElementPattern<JSReferenceExpress
     })
 }
 
-fun getReferenceParts(jsReferenceExpression: JSReferenceExpression): List<String> {
+internal fun getReferenceParts(jsReferenceExpression: JSReferenceExpression): List<String> {
     val nameParts = SmartList<String>()
 
     var ref: JSReferenceExpression? = jsReferenceExpression
