@@ -12,7 +12,7 @@ import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.util.PsiUtilCore
 
-class StyledComponentsErrorFilter : HighlightErrorFilter() {
+internal class StyledComponentsErrorFilter : HighlightErrorFilter() {
   companion object {
     private val STYLED_COMPONENTS_INJECTION = Key.create<Boolean>("styled.components.injection")
 

@@ -12,10 +12,10 @@ import com.intellij.psi.PsiLanguageInjectionHost
 import com.intellij.psi.xml.XmlAttributeValue
 import org.intellij.plugins.postcss.PostCssLanguage
 
-const val COMPONENT_PROPS_PREFIX = "div {"
-const val COMPONENT_PROPS_SUFFIX = "}"
+internal const val COMPONENT_PROPS_PREFIX = "div {"
+internal const val COMPONENT_PROPS_SUFFIX = "}"
 
-class StyledComponentsInjector : MultiHostInjector {
+private class StyledComponentsInjector : MultiHostInjector {
     private object Holder {
         private val styledPattern = withNameStartingWith(listOf("styled"))
         private val builtinPlaces: List<PlaceInfo> = listOf(
