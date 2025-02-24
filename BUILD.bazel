@@ -7,6 +7,12 @@ jvm_resources(
   strip_prefix = "src/main/resources"
 )
 
+jvm_resources(
+  name = "styled-components_test_resources",
+  files = glob(["testData/**/*"]),
+  strip_prefix = "testData"
+)
+
 jvm_library(
   name = "styled-components",
   module_name = "intellij.styled.components",
@@ -60,7 +66,10 @@ jvm_library(
     "@community//platform/testFramework",
     "@community//platform/testFramework:testFramework_test_lib",
   ],
-  runtime_deps = [":styled-components_resources"]
+  runtime_deps = [
+    ":styled-components_resources",
+    ":styled-components_test_resources",
+  ]
 )
 
 jvm_test(
