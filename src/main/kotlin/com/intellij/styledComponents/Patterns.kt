@@ -55,7 +55,7 @@ internal fun getReferenceParts(jsReferenceExpression: JSReferenceExpression): Li
     var ref: JSReferenceExpression? = jsReferenceExpression
     while (ref != null) {
         val name = ref.referenceName
-        if (StringUtil.isEmptyOrSpaces(name)) return ContainerUtil.emptyList()
+        if (name.isNullOrBlank()) return ContainerUtil.emptyList()
         nameParts.add(name)
         val qualifier = ref.qualifier
         ref = qualifier as? JSReferenceExpression
@@ -76,8 +76,8 @@ fun jsxAttribute(name: String): ElementPattern<out PsiElement> {
     //matches 'plain' attribute: '<div css="value"/>'
     val stringValuedCssAttribute = cssAttributePattern
             .withChild(PlatformPatterns.psiElement(XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN))
-    
-    //matches JS literal inside JSX expression: '<div css={"value"}/>' 
+
+    //matches JS literal inside JSX expression: '<div css={"value"}/>'
     val jsInCssAttributePattern = JSPatterns.jsLiteralExpression()
             .with(object : PatternCondition<JSLiteralExpression?>("isStringLiteral") {
                 override fun accepts(literal: JSLiteralExpression, context: ProcessingContext?): Boolean {
