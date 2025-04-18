@@ -2,6 +2,7 @@ package com.intellij.styledComponents
 
 import com.intellij.codeInsight.highlighting.HighlightErrorFilter
 import com.intellij.lang.Language
+import com.intellij.lang.injection.MultiHostRegistrar
 import com.intellij.openapi.util.Key
 import com.intellij.psi.PsiErrorElement
 import com.intellij.psi.PsiLanguageInjectionHost
@@ -16,8 +17,8 @@ internal class StyledComponentsErrorFilter : HighlightErrorFilter() {
   companion object {
     private val STYLED_COMPONENTS_INJECTION = Key.create<Boolean>("styled.components.injection")
 
-    fun register(host: PsiLanguageInjectionHost, language: Language) {
-      InjectedLanguageUtil.getCachedInjectedFileWithLanguage(host, language)?.putUserData(STYLED_COMPONENTS_INJECTION, true)
+    fun register(registrar: MultiHostRegistrar) {
+      registrar.putInjectedFileUserData(STYLED_COMPONENTS_INJECTION, true)
     }
   }
 

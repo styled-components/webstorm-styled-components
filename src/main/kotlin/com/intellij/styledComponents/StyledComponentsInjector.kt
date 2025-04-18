@@ -58,14 +58,14 @@ private class StyledComponentsInjector : MultiHostInjector {
             val theSuffix = if (index == stringPlaces.size - 1) suffix.orEmpty() + acceptedPattern.suffix else suffix
             registrar.addPlace(thePrefix, theSuffix, injectionHost, range)
         }
-        registrar.doneInjecting()
 
         if (stringPlaces.size > 1) {
-            StringInterpolationErrorFilter.register(injectionHost, injectionLanguage)
-            StyledComponentsErrorFilter.register(injectionHost, injectionLanguage)
+            StringInterpolationErrorFilter.register(registrar)
+            StyledComponentsErrorFilter.register(registrar)
         }
+        JSFormattableInjectionUtil.setReformattableInjection(injectionHost, registrar)
+        registrar.doneInjecting()
 
-        JSFormattableInjectionUtil.setReformattableInjection(injectionHost, injectionLanguage)
     }
 
 }
