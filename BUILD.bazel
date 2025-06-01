@@ -19,6 +19,7 @@ jvm_library(
   visibility = ["//visibility:public"],
   srcs = glob(["src/main/kotlin/**/*.kt", "src/main/kotlin/**/*.java"], allow_empty = True),
   deps = [
+    "@community//platform/analysis-api:analysis",
     "@community//platform/util",
     "@community//platform/platform-api:ide",
     "@community//platform/platform-impl:ide-impl",
@@ -46,6 +47,7 @@ jvm_library(
   srcs = glob(["src/test/**/*.kt", "src/test/**/*.java"], allow_empty = True),
   associates = [":styled-components"],
   deps = [
+    "@community//platform/analysis-api:analysis",
     "@community//platform/util",
     "@community//platform/platform-api:ide",
     "@community//platform/platform-impl:ide-impl",
