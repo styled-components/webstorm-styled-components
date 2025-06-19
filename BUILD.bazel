@@ -51,6 +51,7 @@ jvm_library(
   associates = [":styled-components"],
   deps = [
     "@community//platform/analysis-api:analysis",
+    "@community//platform/code-style-api:codeStyle",
     "@community//platform/projectModel-api:projectModel",
     "@community//platform/util",
     "@community//platform/platform-api:ide",
