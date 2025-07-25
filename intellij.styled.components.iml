@@ -19,7 +19,7 @@
     <orderEntry type="module" module-name="intellij.platform.lang.impl" />
     <orderEntry type="module" module-name="intellij.javascript.parser" />
     <orderEntry type="module" module-name="intellij.xml.parser" />
-    <orderEntry type="module" module-name="intellij.css.frontback" />
+    <orderEntry type="module" module-name="intellij.css.common" />
     <orderEntry type="module" module-name="intellij.platform.core" />
     <orderEntry type="module" module-name="intellij.css.psi" />
     <orderEntry type="module" module-name="intellij.platform.core.ui" />
@@ -30,6 +30,6 @@
     <orderEntry type="module" module-name="intellij.javascript.impl" />
     <orderEntry type="module" module-name="intellij.platform.testFramework" scope="TEST" />
     <orderEntry type="module" module-name="intellij.xml.psi" />
-    <orderEntry type="module" module-name="intellij.css.frontback.psi" />
+    <orderEntry type="module" module-name="intellij.css.common.psi" />
   </component>
 </module>
