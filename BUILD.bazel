@@ -37,7 +37,7 @@ jvm_library(
     "//contrib/postcss",
     "//plugins/JavaScriptLanguage:javascript-impl",
     "@community//xml/xml-psi-api:psi",
-    "//CSS/frontback/css-psi-impl:css-frontback-psi",
+    "//plugins/css/common/psi",
   ],
   runtime_deps = [":styled-components_resources"]
 )
@@ -70,7 +70,7 @@ jvm_library(
     "@community//platform/testFramework",
     "@community//platform/testFramework:testFramework_test_lib",
     "@community//xml/xml-psi-api:psi",
-    "//CSS/frontback/css-psi-impl:css-frontback-psi",
+    "//plugins/css/common/psi",
   ],
   runtime_deps = [
     ":styled-components_resources",
