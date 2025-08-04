@@ -32,5 +32,6 @@
     <orderEntry type="module" module-name="intellij.css.common.psi" />
     <orderEntry type="module" module-name="intellij.css.analysis" scope="TEST" />
     <orderEntry type="module" module-name="intellij.css.backend" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.javascript.common" />
   </component>
 </module>

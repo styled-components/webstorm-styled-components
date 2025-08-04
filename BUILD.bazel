@@ -37,6 +37,7 @@ jvm_library(
     "//plugins/JavaScriptLanguage:javascript-backend",
     "@community//xml/xml-psi-api:psi",
     "//plugins/css/common/psi",
+    "//plugins/JavaScriptLanguage/javascript-common",
   ],
   runtime_deps = [":styled-components_resources"]
 )
@@ -71,6 +72,7 @@ jvm_library(
     "//plugins/css/common/psi",
     "//plugins/css/analysis",
     "//plugins/css/backend",
+    "//plugins/JavaScriptLanguage/javascript-common",
   ],
   runtime_deps = [
     ":styled-components_resources",
