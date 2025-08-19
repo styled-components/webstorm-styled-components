@@ -17,7 +17,7 @@ jvm_library(
   name = "styled-components",
   module_name = "intellij.styled.components",
   visibility = ["//visibility:public"],
-  srcs = glob(["src/main/kotlin/**/*.kt", "src/main/kotlin/**/*.java"], allow_empty = True),
+  srcs = glob(["src/main/kotlin/**/*.kt", "src/main/kotlin/**/*.java", "src/main/kotlin/**/*.form"], allow_empty = True),
   deps = [
     "@community//platform/analysis-api:analysis",
     "@community//platform/projectModel-api:projectModel",
@@ -45,7 +45,7 @@ jvm_library(
 jvm_library(
   name = "styled-components_test_lib",
   visibility = ["//visibility:public"],
-  srcs = glob(["src/test/**/*.kt", "src/test/**/*.java"], allow_empty = True),
+  srcs = glob(["src/test/**/*.kt", "src/test/**/*.java", "src/test/**/*.form"], allow_empty = True),
   associates = [":styled-components"],
   deps = [
     "@community//platform/analysis-api:analysis",
