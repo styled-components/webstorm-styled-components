@@ -74,10 +74,7 @@ jvm_library(
     "//plugins/css/backend",
     "//plugins/JavaScriptLanguage/javascript-common",
   ],
-  runtime_deps = [
-    ":styled-components_resources",
-    ":styled-components_test_resources",
-  ]
+  runtime_deps = [":styled-components_test_resources"]
 )
 ### auto-generated section `build intellij.styled.components` end
 
