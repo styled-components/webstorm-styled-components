@@ -71,7 +71,7 @@ jvm_library(
     "@community//platform/testFramework:testFramework_test_lib",
     "@community//xml/xml-psi-api:psi",
     "//plugins/css/common/psi",
-    "//plugins/css/analysis",
+    "//plugins/css/paid/analysis",
     "//plugins/css/backend",
     "//plugins/JavaScriptLanguage/javascript-common",
   ]
