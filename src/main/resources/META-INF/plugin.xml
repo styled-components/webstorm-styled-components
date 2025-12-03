@@ -3,6 +3,7 @@
   <name>Styled Components &amp; Styled JSX</name>
   <category>JavaScript Frameworks and Tools</category>
   <vendor>JetBrains</vendor>
+  <depends>com.intellij.modules.ultimate</depends>
   <depends>com.intellij.modules.lang</depends>
   <depends>com.intellij.css</depends>
   <depends>JavaScript</depends>
