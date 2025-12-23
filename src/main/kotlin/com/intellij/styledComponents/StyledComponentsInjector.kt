@@ -15,7 +15,7 @@ import org.intellij.plugins.postcss.PostCssLanguage
 internal const val COMPONENT_PROPS_PREFIX = "div {"
 internal const val COMPONENT_PROPS_SUFFIX = "}"
 
-private class StyledComponentsInjector : MultiHostInjector {
+internal class StyledComponentsInjector : MultiHostInjector {
     private object Holder {
         private val styledPattern = withNameStartingWith(listOf("styled"))
         private val builtinPlaces: List<PlaceInfo> = listOf(

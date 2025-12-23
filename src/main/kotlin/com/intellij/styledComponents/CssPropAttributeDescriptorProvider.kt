@@ -22,7 +22,7 @@ private const val STYLED_COMPONENTS_PACKAGE_NAME = "styled-components"
 
 private val JS_STRING_TYPE = JSNamedTypeFactory.createStringPrimitiveType(JSTypeSource.EMPTY)
 
-private class CssPropAttributeDescriptorProvider : XmlAttributeDescriptorsProvider {
+internal class CssPropAttributeDescriptorProvider : XmlAttributeDescriptorsProvider {
     override fun getAttributeDescriptors(tag: XmlTag?): Array<XmlAttributeDescriptor> {
         if (tag != null && isCssPropSupported(tag)) {
             return arrayOf(createCssPropertyDescriptor(tag))

@@ -25,7 +25,7 @@ import javax.swing.JPanel
 import javax.swing.JTable
 import javax.swing.table.AbstractTableModel
 
-private class StyledComponentsConfigurable(private val project: Project) : SearchableConfigurable {
+internal class StyledComponentsConfigurable(private val project: Project) : SearchableConfigurable {
   private val myConfiguration = CustomInjectionsConfiguration.instance(project)
   private val tagsModel = TagsModel()
   private val disposable = Disposer.newDisposable()
