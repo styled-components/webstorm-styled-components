@@ -2,14 +2,20 @@ package com.intellij.styledComponents
 
 import com.intellij.lang.javascript.DialectDetector
 import com.intellij.lang.javascript.patterns.JSPatterns
-import com.intellij.lang.javascript.psi.*
+import com.intellij.lang.javascript.psi.JSCallExpression
+import com.intellij.lang.javascript.psi.JSEmbeddedContent
+import com.intellij.lang.javascript.psi.JSExpression
+import com.intellij.lang.javascript.psi.JSLiteralExpression
+import com.intellij.lang.javascript.psi.JSReferenceExpression
 import com.intellij.lang.javascript.psi.ecma6.ES6TaggedTemplateExpression
 import com.intellij.lang.javascript.psi.ecma6.JSStringTemplateExpression
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.patterns.ElementPattern
 import com.intellij.patterns.PatternCondition
 import com.intellij.patterns.PlatformPatterns
-import com.intellij.patterns.XmlPatterns.*
+import com.intellij.patterns.XmlPatterns.xmlAttribute
+import com.intellij.patterns.XmlPatterns.xmlAttributeValue
+import com.intellij.patterns.XmlPatterns.xmlTag
 import com.intellij.psi.PsiElement
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.XmlTag
@@ -17,7 +23,7 @@ import com.intellij.psi.xml.XmlTokenType
 import com.intellij.util.ProcessingContext
 import com.intellij.util.SmartList
 import com.intellij.util.containers.ContainerUtil
-import java.util.*
+import java.util.Collections
 
 internal fun taggedTemplate(name: String): ElementPattern<JSStringTemplateExpression> {
     return taggedTemplate(referenceExpression().withText(name))

@@ -1,11 +1,18 @@
 package com.intellij.styledComponents
 
-import com.intellij.lang.javascript.patterns.JSPatterns.*
+import com.intellij.lang.javascript.patterns.JSPatterns.jsArgument
+import com.intellij.lang.javascript.patterns.JSPatterns.jsLiteralExpression
+import com.intellij.lang.javascript.patterns.JSPatterns.jsProperty
+import com.intellij.lang.javascript.patterns.JSPatterns.jsReferenceExpression
 import com.intellij.lang.javascript.psi.JSLiteralExpression
 import com.intellij.lang.javascript.psi.JSLiteralExpressionKind
 import com.intellij.lang.javascript.psi.JSObjectLiteralExpression
 import com.intellij.lang.javascript.psi.ecma6.JSStringTemplateExpression
-import com.intellij.psi.*
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiReference
+import com.intellij.psi.PsiReferenceContributor
+import com.intellij.psi.PsiReferenceProvider
+import com.intellij.psi.PsiReferenceRegistrar
 import com.intellij.psi.css.resolve.CssClassOrIdReference
 import com.intellij.psi.css.util.CssResolveUtil
 import com.intellij.psi.filters.ElementFilter

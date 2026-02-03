@@ -18,7 +18,11 @@ import com.intellij.ui.ToolbarDecorator
 import com.intellij.ui.table.JBTable
 import com.intellij.util.ui.EditableModel
 import com.intellij.util.ui.ItemRemovable
-import com.intellij.util.ui.table.*
+import com.intellij.util.ui.table.EditorTextFieldJBTableRowRenderer
+import com.intellij.util.ui.table.JBListTable
+import com.intellij.util.ui.table.JBTableRow
+import com.intellij.util.ui.table.JBTableRowEditor
+import com.intellij.util.ui.table.JBTableRowRenderer
 import java.awt.BorderLayout
 import javax.swing.JComponent
 import javax.swing.JPanel
