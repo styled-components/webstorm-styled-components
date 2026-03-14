@@ -7,12 +7,6 @@ resourcegroup(
   strip_prefix = "src/main/resources"
 )
 
-resourcegroup(
-  name = "styled-components_test_resources",
-  srcs = glob(["testData/**/*"]),
-  strip_prefix = "testData"
-)
-
 jvm_library(
   name = "styled-components",
   module_name = "intellij.styled.components",
@@ -44,10 +38,70 @@ jvm_library(
 
 jvm_library(
   name = "styled-components_test_lib",
+  module_name = "intellij.styled.components",
+  visibility = ["//visibility:public"],
+  srcs = glob([], allow_empty = True),
+  runtime_deps = [
+    ":styled-components",
+    "@community//platform/analysis-api:analysis_test_lib",
+    "@community//platform/code-style-api:codeStyle",
+    "@community//platform/code-style-api:codeStyle_test_lib",
+    "@community//platform/projectModel-api:projectModel_test_lib",
+    "@community//platform/util:util_test_lib",
+    "@community//platform/platform-api:ide_test_lib",
+    "@community//platform/platform-impl:ide-impl_test_lib",
+    "@community//platform/lang-impl:lang-impl_test_lib",
+    "//plugins/JavaScriptLanguage/javascript-parser:javascript-parser_test_lib",
+    "@community//xml/xml-parser:parser_test_lib",
+    "//plugins/css/common:common_test_lib",
+    "@community//platform/core-api:core_test_lib",
+    "//plugins/css/psi:psi_test_lib",
+    "@community//platform/core-ui:core-ui_test_lib",
+    "@community//xml/impl:impl_test_lib",
+    "//plugins/css/plugin:plugin_test_lib",
+    "//contrib/postcss:postcss_test_lib",
+    "//plugins/JavaScriptLanguage:javascript-backend_test_lib",
+    "@community//platform/testFramework",
+    "@community//platform/testFramework:testFramework_test_lib",
+    "@community//xml/xml-psi-api:psi_test_lib",
+    "//plugins/css/common/psi:psi_test_lib",
+    "//plugins/css/codeinsight/analysis",
+    "//plugins/css/codeinsight/analysis:analysis_test_lib",
+    "//plugins/css/backend",
+    "//plugins/css/backend:backend_test_lib",
+    "//plugins/JavaScriptLanguage/javascript-common:javascript-common_test_lib",
+  ]
+)
+### auto-generated section `build intellij.styled.components` end
+
+### auto-generated section `iml intellij.styled.components` start
+exports_files([
+  "intellij.styled.components.iml",
+], visibility = ["//visibility:public"])
+### auto-generated section `iml intellij.styled.components` end
+
+### auto-generated section `build intellij.styled.components.tests` start
+resourcegroup(
+  name = "styled-components-tests_test_resources",
+  srcs = glob(["testData/**/*"]),
+  strip_prefix = "testData"
+)
+
+jvm_library(
+  name = "styled-components-tests",
+  visibility = ["//visibility:public"],
+  srcs = glob([], allow_empty = True)
+)
+
+jvm_library(
+  name = "styled-components-tests_test_lib",
   visibility = ["//visibility:public"],
   srcs = glob(["src/test/**/*.kt", "src/test/**/*.java", "src/test/**/*.form"], allow_empty = True),
-  resources = [":styled-components_test_resources"],
-  associates = [":styled-components"],
+  resources = [":styled-components-tests_test_resources"],
+  associates = [
+    "//plugins/styled-components",
+    "//plugins/styled-components:styled-components_test_lib",
+  ],
   deps = [
     "@community//platform/analysis-api:analysis",
     "@community//platform/analysis-api:analysis_test_lib",
@@ -95,21 +149,24 @@ jvm_library(
     "//plugins/JavaScriptLanguage/javascript-common",
     "//plugins/JavaScriptLanguage/javascript-common:javascript-common_test_lib",
   ],
-  runtime_deps = ["@community//platform/platform-impl:ide-impl_test_lib"]
+  runtime_deps = [
+    ":styled-components-tests",
+    "@community//platform/platform-impl:ide-impl_test_lib",
+  ]
 )
-### auto-generated section `build intellij.styled.components` end
+### auto-generated section `build intellij.styled.components.tests` end
 
-### auto-generated section `iml intellij.styled.components` start
+### auto-generated section `iml intellij.styled.components.tests` start
 exports_files([
-  "intellij.styled.components.iml",
+  "intellij.styled.components.tests.iml",
 ], visibility = ["//visibility:public"])
-### auto-generated section `iml intellij.styled.components` end
+### auto-generated section `iml intellij.styled.components.tests` end
 
-### auto-generated section `test intellij.styled.components` start
+### auto-generated section `test intellij.styled.components.tests` start
 load("@community//build:tests-options.bzl", "jps_test")
 
 jps_test(
-  name = "styled-components_test",
-  runtime_deps = [":styled-components_test_lib"]
+  name = "styled-components-tests_test",
+  runtime_deps = [":styled-components-tests_test_lib"]
 )
-### auto-generated section `test intellij.styled.components` end
+### auto-generated section `test intellij.styled.components.tests` end
