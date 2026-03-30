@@ -15,6 +15,12 @@
         <li>Various quick fixes and intentions for CSS when you press Alt-Enter.
         <li>Completion suggestions for JavaScript variables, methods, and functions and navigation to their definitions with Cmd/Ctrl-click.
     ]]></description>
+  <!-- region Generated dependencies - run `Generate Product Layouts` to regenerate -->
+  <dependencies>
+    <module name="intellij.javascript.common"/>
+    <module name="intellij.javascript.parser"/>
+  </dependencies>
+  <!-- endregion -->
   <resource-bundle>messages.StyledComponentsBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
