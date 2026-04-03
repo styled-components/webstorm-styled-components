@@ -34,5 +34,6 @@
     <xml.attributeDescriptorsProvider implementation="com.intellij.styledComponents.CssPropAttributeDescriptorProvider"/>
     <highlightErrorFilter implementation="com.intellij.styledComponents.StyledComponentsErrorFilter"/>
     <psi.referenceContributor language="JavaScript" implementation="com.intellij.styledComponents.StyledComponentsReferenceContributor"/>
+    <projectSettings service="com.intellij.styledComponents.CustomInjectionsConfiguration"/>
   </extensions>
 </idea-plugin>
