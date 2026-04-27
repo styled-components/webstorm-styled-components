@@ -36,6 +36,7 @@ jvm_library(
     "@community//xml/xml-psi-api:psi",
     "//plugins/css/common/psi",
     "//plugins/JavaScriptLanguage/javascript-common",
+    "//plugins/JavaScriptLanguage/javascript-psi-impl",
   ]
 )
 
@@ -77,6 +78,7 @@ jvm_library(
     "//plugins/css/backend",
     "//plugins/css/backend:backend_test_lib",
     "//plugins/JavaScriptLanguage/javascript-common:javascript-common_test_lib",
+    "//plugins/JavaScriptLanguage/javascript-psi-impl:javascript-psi-impl_test_lib",
   ]
 )
 ### auto-generated section `build intellij.styled.components` end

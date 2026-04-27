@@ -17,8 +17,10 @@
     ]]></description>
   <!-- region Generated dependencies - run `Generate Product Layouts` to regenerate -->
   <dependencies>
+    <module name="intellij.javascript.backend"/>
     <module name="intellij.javascript.common"/>
     <module name="intellij.javascript.parser"/>
+    <module name="intellij.javascript.psi.impl"/>
   </dependencies>
   <!-- endregion -->
   <resource-bundle>messages.StyledComponentsBundle</resource-bundle>
