@@ -41,6 +41,7 @@ jvm_library(
 
 jvm_library(
   name = "styled-components_test_lib",
+  testonly = True,
   module_name = "intellij.styled.components",
   visibility = ["//visibility:public"],
   srcs = glob([], allow_empty = True),
@@ -102,6 +103,7 @@ jvm_library(
 
 jvm_library(
   name = "styled-components-tests_test_lib",
+  testonly = True,
   visibility = ["//visibility:public"],
   srcs = glob(["src/test/**/*.kt", "src/test/**/*.java", "src/test/**/*.form"], allow_empty = True),
   resources = [":styled-components-tests_test_resources"],
