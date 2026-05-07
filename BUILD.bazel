@@ -1,18 +1,13 @@
 ### auto-generated section `build intellij.styled.components` start
-load("@rules_jvm//:jvm.bzl", "jvm_library", "resourcegroup")
-
-resourcegroup(
-  name = "styled-components_resources",
-  srcs = glob(["src/main/resources/**/*"]),
-  strip_prefix = "src/main/resources"
-)
+load("@rules_jvm//:jvm.bzl", "jvm_library")
 
 jvm_library(
   name = "styled-components",
   module_name = "intellij.styled.components",
   visibility = ["//visibility:public"],
   srcs = glob(["src/main/kotlin/**/*.kt", "src/main/kotlin/**/*.java", "src/main/kotlin/**/*.form"], allow_empty = True),
-  resources = [":styled-components_resources"],
+  resources = glob(["src/main/resources/**/*"]),
+  resource_strip_prefix = "src/main/resources",
   deps = [
     "@community//platform/analysis-api:analysis",
     "@community//platform/projectModel-api:projectModel",
@@ -90,12 +85,6 @@ exports_files([
 ### auto-generated section `iml intellij.styled.components` end
 
 ### auto-generated section `build intellij.styled.components.tests` start
-resourcegroup(
-  name = "styled-components-tests_test_resources",
-  srcs = glob(["testData/**/*"]),
-  strip_prefix = "testData"
-)
-
 jvm_library(
   name = "styled-components-tests",
   module_name = "intellij.styled.components.tests",
@@ -108,7 +97,8 @@ jvm_library(
   testonly = True,
   visibility = ["//visibility:public"],
   srcs = glob(["src/test/**/*.kt", "src/test/**/*.java", "src/test/**/*.form"], allow_empty = True),
-  resources = [":styled-components-tests_test_resources"],
+  resources = glob(["testData/**/*"]),
+  resource_strip_prefix = "testData",
   associates = [
     "//plugins/styled-components",
     "//plugins/styled-components:styled-components_test_lib",
