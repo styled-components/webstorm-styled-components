@@ -26,7 +26,7 @@
     <orderEntry type="module" module-name="intellij.platform.core.impl" scope="TEST" />
     <orderEntry type="module" module-name="intellij.xml.impl" scope="TEST" />
     <orderEntry type="module" module-name="intellij.css.plugin" scope="TEST" />
-    <orderEntry type="module" module-name="intellij.postcss" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.postcss.paid" scope="TEST" />
     <orderEntry type="module" module-name="intellij.javascript.backend" scope="TEST" />
     <orderEntry type="module" module-name="intellij.platform.testFramework" scope="TEST" />
     <orderEntry type="module" module-name="intellij.xml.psi" scope="TEST" />
