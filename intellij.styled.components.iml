@@ -9,7 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="intellij.platform.analysis" />
-    <orderEntry type="module" module-name="intellij.platform.codeStyle" scope="TEST" />
     <orderEntry type="module" module-name="intellij.platform.projectModel" />
     <orderEntry type="module" module-name="intellij.platform.util" />
     <orderEntry type="module" module-name="intellij.platform.util.ui" />
@@ -27,11 +26,8 @@
     <orderEntry type="module" module-name="intellij.postcss.plugin" />
     <orderEntry type="module" module-name="intellij.postcss.paid" />
     <orderEntry type="module" module-name="intellij.javascript.backend" />
-    <orderEntry type="module" module-name="intellij.platform.testFramework" scope="TEST" />
     <orderEntry type="module" module-name="intellij.xml.psi" />
     <orderEntry type="module" module-name="intellij.css.common.psi" />
-    <orderEntry type="module" module-name="intellij.css.analysis" scope="TEST" />
-    <orderEntry type="module" module-name="intellij.css.backend" scope="TEST" />
     <orderEntry type="module" module-name="intellij.javascript.common" />
     <orderEntry type="module" module-name="intellij.javascript.psi.impl" />
   </component>
