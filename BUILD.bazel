@@ -2,7 +2,6 @@ load("@community//build:tests-options.bzl", "jps_test")
 load("@rules_jvm//:jvm.bzl", "jvm_library")
 
 ### auto-generated section `build intellij.styled.components` start
-
 jvm_library(
     name = "styled-components",
     srcs = glob(
@@ -102,7 +101,6 @@ exports_files(
 ### auto-generated section `iml intellij.styled.components` end
 
 ### auto-generated section `build intellij.styled.components.tests` start
-
 jvm_library(
     name = "styled-components-tests",
     srcs = glob(
@@ -201,7 +199,6 @@ exports_files(
 ### auto-generated section `iml intellij.styled.components.tests` end
 
 ### auto-generated section `test intellij.styled.components.tests` start
-
 jps_test(
     name = "styled-components-tests_test",
     runtime_deps = [":styled-components-tests_test_lib"],
