@@ -99,7 +99,6 @@ exports_files(
     [
         "intellij.styled.components.iml",
         "src/main/resources/META-INF/plugin.xml",
-        "plugin-content.yaml",
     ],
     visibility = ["//visibility:public"],
 )
