@@ -1,5 +1,6 @@
 load("@community//build:tests-options.bzl", "jps_test")
 load("@community//platform/build-scripts/bazel-rules:dev_dist_plugin.bzl", "dev_dist_plugin")
+load("@community//platform/build-scripts/bazel-rules:ij_plugin.bzl", "ij_plugin")
 load("@jps_dynamic_deps_ultimate//:targets.bzl", "MODULE_TARGETS")
 load("@rules_jvm//:jvm.bzl", "jvm_library")
 
@@ -98,6 +99,12 @@ jvm_library(
         "//plugins/JavaScriptLanguage/javascript-common:javascript-common_test_lib",
         "//plugins/JavaScriptLanguage/javascript-psi-impl:javascript-psi-impl_test_lib",
     ],
+)
+
+ij_plugin(
+    name = "styled-components_plugin",
+    descriptor_module = ":styled-components",
+    visibility = ["//visibility:public"],
 )
 ### auto-generated section `build intellij.styled.components` end
 
