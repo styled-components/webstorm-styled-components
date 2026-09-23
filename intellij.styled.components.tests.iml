@@ -35,6 +35,7 @@
     <orderEntry type="module" module-name="intellij.javascript.common" scope="TEST" />
     <orderEntry type="module" module-name="intellij.styled.components" scope="TEST" />
     <orderEntry type="module" module-name="intellij.libraries.junit4" scope="TEST" />
+    <orderEntry type="module" module-name="intellij.platform.scratch.plugin" scope="TEST" />
   </component>
   <component name="TestModuleProperties" production-module="intellij.styled.components" />
 </module>
