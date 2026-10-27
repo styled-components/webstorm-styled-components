@@ -93,13 +93,15 @@ jvm_library(
         "//plugins/JavaScriptLanguage/javascript-psi-impl:javascript-psi-impl_test_lib",
     ],
 )
+### auto-generated section `build intellij.styled.components` end
 
+### auto-generated section `plugin intellij.styled.components` start
 ij_plugin(
     name = "styled-components_plugin",
     descriptor_module = ":styled-components",
     visibility = ["//visibility:public"],
 )
-### auto-generated section `build intellij.styled.components` end
+### auto-generated section `plugin intellij.styled.components` end
 
 ### auto-generated section `iml intellij.styled.components` start
 exports_files(
