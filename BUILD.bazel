@@ -30,6 +30,11 @@ jvm_library(
         ["src/main/resources/**/*"],
     ),
     visibility = ["//visibility:public"],
+    runtime_deps = [
+        # do not sort,
+        "//plugins/css/plugin",
+        "//contrib/postcss/plugin",
+    ],
     deps = [
         # do not sort,
         "@community//platform/analysis-api:analysis",
@@ -46,8 +51,6 @@ jvm_library(
         "@community//platform/core-api:core",
         "@community//platform/core-ui",
         "@community//platform/core-impl",
-        "//plugins/css/plugin",
-        "//contrib/postcss/plugin",
         "//contrib/postcss/paid",
         "//plugins/JavaScriptLanguage/javascript-backend",
         "@community//xml/xml-psi-api:psi",
