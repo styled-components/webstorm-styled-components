@@ -1,6 +1,7 @@
+load("@community//build:jps_module.bzl", "jps_module")
 load("@community//build:tests-options.bzl", "jps_test")
+load("@community//platform/build-scripts/bazel-rules:dist_plugin.bzl", "dist_plugin")
 load("@community//platform/build-scripts/bazel-rules:ij_plugin.bzl", "ij_plugin")
-load("@jps_dynamic_deps_ultimate//:targets.bzl", "dist_plugin")
 load("@rules_jvm//:jvm.bzl", "jvm_library")
 
 ### auto-generated section `dev intellij.styled.components` start
@@ -10,6 +11,9 @@ dist_plugin(
         "lib/styled-components.jar": ["intellij.styled.components"],
     },
     main_module = "intellij.styled.components",
+    module_labels = {
+        "intellij.styled.components": "//plugins/styled-components:styled-components",
+    },
 )
 ### auto-generated section `dev intellij.styled.components` end
 
@@ -70,12 +74,11 @@ ij_plugin(
 ### auto-generated section `plugin intellij.styled.components` end
 
 ### auto-generated section `iml intellij.styled.components` start
-exports_files(
-    [
-        "intellij.styled.components.iml",
-        "src/main/resources/META-INF/plugin.xml",
-    ],
-    visibility = ["//visibility:public"],
+jps_module(
+    name = "intellij.styled.components",
+    descriptors = ["src/main/resources/META-INF/plugin.xml"],
+    plugin = True,
+    target = "styled-components",
 )
 ### auto-generated section `iml intellij.styled.components` end
 
@@ -123,11 +126,9 @@ jvm_library(
 ### auto-generated section `build intellij.styled.components.tests` end
 
 ### auto-generated section `iml intellij.styled.components.tests` start
-exports_files(
-    [
-        "intellij.styled.components.tests.iml",
-    ],
-    visibility = ["//visibility:public"],
+jps_module(
+    name = "intellij.styled.components.tests",
+    target = "styled-components-tests_test_lib",
 )
 ### auto-generated section `iml intellij.styled.components.tests` end
 
