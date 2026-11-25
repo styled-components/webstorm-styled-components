@@ -7,13 +7,9 @@ load("@rules_jvm//:jvm.bzl", "jvm_library")
 ### auto-generated section `dev intellij.styled.components` start
 dist_plugin(
     descriptor = "src/main/resources/META-INF/plugin.xml",
-    jars = {
-        "lib/styled-components.jar": ["intellij.styled.components"],
-    },
+    jars = {"lib/styled-components.jar": ["intellij.styled.components"]},
     main_module = "intellij.styled.components",
-    module_labels = {
-        "intellij.styled.components": "//plugins/styled-components:styled-components",
-    },
+    module_labels = {"intellij.styled.components": "//plugins/styled-components"},
 )
 ### auto-generated section `dev intellij.styled.components` end
 
